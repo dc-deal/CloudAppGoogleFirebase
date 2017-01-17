@@ -19,7 +19,7 @@ import java.util.Map;
 public class ItemClass implements Serializable {
 
     private String name, searchName, desc, parCat,createdBy,galleryPic;
-    private HashMap<String,String> imgs = new HashMap<>();
+    private HashMap<String,Boolean> imgs = new HashMap<>();
     private HashMap<String,Boolean> tags = new HashMap();
     private boolean isPublished = false;
    // dann wird sie so abgespreichertn. vorteil: bilder die shcon da sind werden nicht neu hochgeladen.
@@ -28,7 +28,7 @@ public class ItemClass implements Serializable {
     @Exclude
     private String key;
     @Exclude
-    public ArrayList<ImagesClass> uploadImages = new ArrayList<>();
+    private ArrayList<ImagesClass> uploadImages = new ArrayList<>();
 
 
     public ItemClass() {
@@ -37,7 +37,7 @@ public class ItemClass implements Serializable {
 
     // LIGHTWEIGHT FIREBASE CONSTRUCTOR...
     // NO FUNCTIONALITY HERE!!!
-    public ItemClass(String name, String searchName, String desc, String parCat, String galleryPic, HashMap<String, String> imgs,
+    public ItemClass(String name, String searchName, String desc, String parCat, String galleryPic, HashMap<String, Boolean> imgs,
                      HashMap<String, Boolean> tags, String createdBy, boolean isPublished) {
         this.name = name;
         this.searchName = searchName;
@@ -82,11 +82,11 @@ public class ItemClass implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public HashMap<String,String> getImgs() {
+    public HashMap<String,Boolean> getImgs() {
         return imgs;
     }
 
-    public void setImgs(HashMap<String,String> imgs) {
+    public void setImgs(HashMap<String,Boolean> imgs) {
         this.imgs = imgs;
     }
 
@@ -132,6 +132,26 @@ public class ItemClass implements Serializable {
     @Exclude
     public void setDbKey(String key){
         this.key= key;
+    }
+
+    @Exclude
+    public Boolean addUploadImage(ImagesClass upImg){
+        Boolean added = false;
+        Boolean equalFound = false;
+        for (ImagesClass img : uploadImages){
+            if (img.getImgUri().equals(upImg.getImgUri())){
+                equalFound = true;
+            }
+        }
+        if (equalFound){
+            uploadImages.add(upImg);
+            return true;
+        }
+        return added;
+    }
+    @Exclude
+    public ArrayList<ImagesClass> getUploadImages(){
+        return uploadImages;
     }
 
     public String getSearchName() {

@@ -23,6 +23,7 @@ import net.livingrecordings.giggermainapp.giggerMainClasses.Exceptions.Gigger_No
 import net.livingrecordings.giggermainapp.giggerMainClasses.Exceptions.Gigger_NoItemInputException;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.ItemImageCasheHelper;
 import net.livingrecordings.giggermainapp.giggerMainClasses.jobs.GiggerPicUploadJob;
+import net.livingrecordings.giggermainapp.giggerMainClasses.models.ImagesClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClassLocal;
 
@@ -46,6 +47,7 @@ public class GiggerMainAPI {
     public static final String ITEMPATH_LOCAL = "ITEMPATH_LOCAL";
     public static final String ITEMPATH_GLOBAL = "ITEMPATH_GLOBAL";
     public static final String ITEMPATH_PRIVATE = "ITEMPATH_PRIVATE";
+    public static final String ITEMPATH_IMAGES = "IMAGES";
     public static final String TAGS_PUBLISHED = "TAGS";
     public static final String BANDS_PUBLISHED = "BANDS_PUBLISHED";
     public static final String USERS_PUBLISHED = "USERS_PUBLISHED";
@@ -162,6 +164,11 @@ public class GiggerMainAPI {
         return mDatabase.getReference().child(TAGS_PUBLISHED);
     }
 
+    public DatabaseReference getImagesRef(String itemKey){
+        return mDatabase.getReference()
+                .child(ITEMPATH).child(ITEMPATH_IMAGES).child(itemKey);
+    }
+
     public Query getDublicateNameSearchQuery(String nameStr) {
         return getLocalItemRef()
                 .orderByChild("searchName").equalTo(nameStr.toUpperCase());
@@ -201,7 +208,7 @@ public class GiggerMainAPI {
             }
         });
     }
-
+/*
     private ArrayList<String> getUploadPics(ItemClass refItem, ItemClass inpItem) {
         ArrayList<String> uniquevalues = new ArrayList(inpItem.getImgs().values());
         uniquevalues.removeAll(refItem.getImgs().values()); // retainAll .. alle behalten..dublikate finden.
@@ -211,7 +218,7 @@ public class GiggerMainAPI {
             uniquevalues.add(inpItem.getGalleryPic());
         }
         return uniquevalues;
-    }
+    }*/
 
     private ItemClass mergeImage(ItemClass inpItem, String image, Boolean isgallery) {
         HashMap<String, String> hm = inpItem.getImgs();
@@ -225,7 +232,7 @@ public class GiggerMainAPI {
         return inpItem;
     }
 
-    public void saveItem(final Context mContext, ItemClass item, ItemClassLocal itemLocal) {
+    public void saveItem(final Context mContext, ItemClass item, final ItemClassLocal itemLocal) {
         // save it.
         try {
             final ItemClass inpItem = item;
@@ -273,30 +280,32 @@ public class GiggerMainAPI {
             getLocalItemRef(key).setValue(itemLocal);
             //----------------------------------
             // dieser abschnitt vergleicht alle hochgeladenen bilder
-            getPrivateItemRef(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            getImagesRef(key).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    ItemClass refItem = dataSnapshot.getValue(ItemClass.class);
-                    // erst  alle bilder "populaten..."
-                    // Variable names edited for readability
-                    ArrayList<String> toUploadList = getUploadPics(refItem, inpItem);
-                    for (String s : toUploadList) { // immer value set
-                        Boolean setToGallery = false;
-                        if (s == inpItem.getGalleryPic()) {
-                            setToGallery = true;
+                    for (DataSnapshot imgDS : dataSnapshot.getChildren()) {
+                        ImagesClass img = imgDS.getValue(ImagesClass.class);
+                        Boolean found = false;
+                        for (ImagesClass locImg  :  inpItem.getUploadImages()){
+                            if (img.getImgUri().equals(locImg.getImgUri())){
+                                found = true; // alles ok.
+                            }
                         }
-                        Uri localUploadFile = ItemImageCasheHelper.getInstance().casheImageFromUri(mContext, inpItem.getDbKey(), Uri.parse(s));
-                        // ist ja schon alles im cashe..
-                        mJobManager.getJobManager(mContext).addJobInBackground(new GiggerPicUploadJob(new UploadImgTaskData(
-                                inpItem.getName(),
-                                inpItem.getDbKey(),
-                                localUploadFile, // der link zum bild auf der festplatte
-                                setToGallery))
-                        ); // muss dann nach dem hochladen gesetzt werden.
+                        if (!found){
+                            Uri localUploadFile = ItemImageCasheHelper.getInstance().casheImageFromUri(mContext, inpItem.getDbKey(), Uri.parse(s));
+                            // ist ja schon alles im cashe..
+                            mJobManager.getJobManager(mContext).addJobInBackground(new GiggerPicUploadJob(new UploadImgTaskData(
+                                    inpItem.getName(),
+                                    inpItem.getDbKey(),
+                                    localUploadFile, // der link zum bild auf der festplatte
+                                    setToGallery))
+                            ); // muss dann nach dem hochladen gesetzt werden.
+                        }
                     }
-                    for (String s : inpItem.deleteList.keySet()) { // nur keys
-                        deleteImageFromItem(key, s);
-                    }
+                    // TODO deletition. everything but uploads....
+              //      for (ImagesClass img : inpItem.deleteList.keySet()) { // nur keys
+                 //       deleteImageFromItem(key, s);
+                 //   }
                 }
 
                 @Override
