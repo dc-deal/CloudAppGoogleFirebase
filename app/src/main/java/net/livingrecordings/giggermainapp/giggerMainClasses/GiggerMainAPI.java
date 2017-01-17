@@ -39,51 +39,6 @@ import java.util.List;
 
 
 // items eintragen
-
-
-//TODO Gigger gig historie. Gig abgesagt ist grau
-// TODO Gigger gig historie..  Wenn du.in die band im feed hast kannst du.die.gig historie einsehen und dss ewuipment was sie benutzen. Auch.dss ausleihen das facebook der musiker
-// TODO (1) (telefonbuch zugriff ( chips) band farben , benutzerfarben (einstellbar), bandlogo einstellbar
-// TODO .. kann man die adapeterlisten aktualiesieren und dann aktualisiert sich auch die view?
-// TODO man kann über einen Suchbildschirm nach Gigger Mitgleidern suchen, die kann man dann einladen, bzw. deirekt in eine deiner Bands einladen(band detail bildschirm).oder Kontakt eionladen activity, da kann man die band zum einladen wählen
-// TODO Personen chips(wie gkalender personen einladen), bearbeiten selbes layout wie details!!Item bearbeiten layout total komisch
-// TODO ( hier kann man Gigger Kontakte suchen.
-// TODO ( man kann online nach angemeldeten Gigger! Kontakten suchen(wenn man sich suchbar stellt).
-// TODO ( alle die die App installiert haben, besitzen automatishceinen Gigger account ( wird angelegt falsl nciht vorhanden oder google connected.)
-// TODO ( man schickt dann einen Invite los, den der andere annehmen kann. dann ist man in der Band.
-// TODO ( man kann den screen für eine Band launchen oder einfach nur einen losen kontakt hinzufügen, mit dem kann man dann chatten..
-// TODO ( man kann auch einfach gigger leuten eine nachricht schreiben.
-// TODO ( man kann auch telefonkontakte nach gigger einladen.
-// TODO (2) Alles mit FireBase verknüpfen, online abspeichern.
-// TODO (3) abspeichern : item list / details / editieren möglich machen - importieren,bans kontakten zu ordenen ,wegordnen.
-// TODO (4) noch ein paar mehr wichtige eigenschaften übernehmen (ev. kamerabild zufügen / image von galerie...
-// TODO - restliche eigenschaften mit übernehmen in die edit felder.
-// TODO (5)  die bezezeichner sollen durch android mat. design icons ersetzt werden..(https://material.io/icons/)
-// TODO (6) Kategorie manager treeview - alle cats, items mehrfachselektion mergen, das soll ein
-// TODO fragment werden. ich kann entweder nur kategorien oder auch gegenstände anzeigen. Die suche funktioniert über den Manager
-// TODO auch alle auswahlboxen könen ndiesen manager nutzen. Bei rechtevergaben wird diese Manager zu mauswählen benutzt
-// TODO also ein vielschichtiges Übersichtstool. (siehe das treeview tool was ich runtergeladen hab!)
-// TODO -> weitere features für gigs soll ein abhaken aller gegenstäne möglich sein, die gebraucht werden.
-// TODO -> welche gegenstände gebraucht werden, kann den gegenständen angehangen weden. das wird in SCHEMAS abespecihert.
-// TODO -> Beispiel: Marshall JVM AMP. MUSS IMMER MIT (root schema) - ITEM CAMSTAND -> schema "Kameraarufnahmen" adden -> AmpMIX -> schema Recording Adden. ->
-// TODO (7) DERGROSSE WURF:
-// TODO Gigger Online Login und sync zwischen registrierten geräten. Leute können sich bei gigger online anmelden. Eigenes profil bearbeitbar (z.b. meine Farbe)
-// TODO Dann können Sie Ihre Bands mitenander verbinden, man kann so andere Giggermitgleider suchen, und einladen.(leute die gigger installiert haben
-// TODO auf ihrem handy erscheinen dann (falls sie zu einer Band oder Kontakt hinzugefügt werden)
-// TODO Später können auch leute mit webapps auf gigger zu greifen, dafür wird dann aber ein account benötigt.
-// TODO d.h. alle leute mit einer Telefonnummer bekommen automatisch online einen dummy gigger account, mit dem tag der telefonnummer. so
-// TODO ist schonmal eine grundsätzliche loginstruktur vorhanden. Man kann dann seinen Accoundnamen noch ändern etc. der name wird dann immer
-// TODO automatisch vergeben (z.b. Name+TelefonModell+ende der TelNR.)
-// TODO (8) Rechtesystem- PRINZIP: Keep it simple. was brauchen die leute wirklich. Sehr basisch halten
-// TODO (8.1) Nur wenn man Mitgleid in der Band ist, kann man gegenseitig gegenstände hinzufügen und bearbeiten. (mitglied wird man wenn man eingeladen wurde).
-// TODO (8.2) Der ersteller des gegenstandes muss das share-flag anhaken, damit andere die gegenstände bearbeiten können.
-// TODO (8.2) Wird der Gegenstand als Band-gegenstand deklariert, darf jeder den gegenstand bearbeiten-löschen etc.
-// TODO (8.3) Bandgegenstände bekommen eigene Farben, der Bandfarbe nach. Benutzter bekommen eigene Farben (wählbar), zur schnellen besitzerunterscheidung.
-// TODO (9) Die ganzen kniffligen fragen. Was passiert wenn ein nutzer aussteigt, wird dann das equipment auf die restlichen Bandmitgleider automatisch übertragen!?!?
-// TODO merge account fature. wenn man zwei accounts aht kann man die zusammenfügen damit die Gegenstände nicht weg sind. (dublikate ignorieren- bei dublikaten im name das lokale nehmen..)
-// -----------------------------------------------------------------
-
-
 public class GiggerMainAPI {
 
     //PFADE..
