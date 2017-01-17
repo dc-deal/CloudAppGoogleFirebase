@@ -1,0 +1,188 @@
+<resources>
+
+    <!-- Deutsche Version...
+    -->
+    <string name="app_name">Gigger!</string>
+    <string name="app_subtitle">Deine Band Management App</string>
+
+    <string name="navigation_drawer_open">Öffnen Sie die Navigation</string>
+    <string name="navigation_drawer_close">Schliessen Sie die Navigationr</string>
+
+    <!-- Menu -->
+    <string name="action_settings">Einstellungen</string>
+
+    <string name="Equipment">Dein Equipment</string>
+    <string name="BandsAndContacts">Kontakte</string>
+
+
+    <string name="untertitel_menuunten">Deine Kontakte</string>
+    <string name="ContactGUser">User anschreiben</string>
+    <string name="ShareItem">Gegenstand teilen</string>
+
+    <string name="no_items_inList">Keine Gegenstände in dieser Kategorie gefunden! Klicke auf das rote Plus, um einen Gegenstand für die Kategorie zu erstellen!</string>
+
+    <string name="editor_caption">s?!?!!</string>
+    <string name="title_EquipEditorActivity_ItemDetail">Detailansicht</string>
+    <string name="myLogin">Zum Login</string>
+    <!-- equipment bearbeiten -
+        Gegenstand - ein gegenstand der in der DB registriert ist
+    Kategorie - eine Kategorie, der Gegenstände zugeordnet werden können
+    Equipment - komplementär für Gegenstand und equipment.
+    -->
+    <string name="title_EquipEditorActivity_editItem">Gegenstand bearbeiten</string>
+    <string name="title_EquipEditorActivity_crItem">Gegenstand erstellen</string>
+    <string name="title_EquipEditorActivity_crCat">Kategorie erstellen</string>
+    <string name="title_EquipEditorActivity_delItem">Gegenstand löschen</string>
+
+    <string name="title_EquipEditorActivity_eqDesc">Beschreibung</string>
+    <string name="title_EquipEditorActivity_eqDescHint">Beschreiben Sie ihren Gegenstand</string>
+    <string name="title_EquipEditorActivity_bildEinladen">Bild mit Kamera Hinzufügen</string>
+    <string name="title_EquipEditorActivity_bildGallery">Bild aus der Gallerie Laden</string>
+
+    <string name="title_EquipEditorActivity_eqCat">Kategorie</string>
+    <!-- kategorie bearbeiten -->
+    <string name="title_EquipEditorActivity_showCat">Kategorie: </string>
+    <string name="title_EquipEditorActivity_editCat">Kategorie bearbeiten</string>
+    <string name="title_EquipEditorActivity_delCat">Kategorie löschen</string>
+
+    <string name="title_EquipEditorActivity_eqCaption">Bezeichnung</string>
+
+    <string name="equip_save">Speichern</string>
+    <string name="title_EquipEditorActivity_catName">Bezeichnung</string>
+    <string name="title_EquipEditorActivity_catNameHint">z.B. Verstärker A</string>
+    <string name="title_EquipEditorActivity_catDesc">Beschreibung</string>
+    <string name="title_EquipEditorActivity_catDescHint">Beschreiben sie die Kategorie</string>
+    <string name="EquipmentManager">Equipment-Manager</string>
+    <string name="choose_cat">Unterkategorie von:</string>
+    <string name="choose_cat_item">In Kategorie</string>
+    <string name="choose_cat_add">Diese Kategorie auswählen</string>
+    <string name="add_new">neu eintragen</string>
+
+    <!-- Band erstellen & EDITROR -->
+    <string name="bandEditor_name">Bandname</string>
+    <string name="bandEditor_nameHint">euer Bandname</string>
+    <string name="bandEditor_Style">Beschreibung</string>
+    <string name="bandEditor_StyleHint">z.B. was für Musik ihr so spielt</string>
+    <string name="bandEditor_logo">bandlogo festlegen</string>
+    <string name="bandEditor_contacts">Kontakte</string>
+    <string name="crBand">Band erstellen</string>
+    <string name="editBand">Band bearbeiten</string>
+    <string name="crContact">Gigger-User einladen</string>
+    <!-- Einstellungen -->
+    <string name="title_activity_einstellungen">Einstellungen</string>
+
+    <string name="preference_title">Einstellung 1</string>
+    <string name="preference_key">Einstellung</string>
+    <string name="preference_default">Dies ist eine Einstellung</string>
+
+    <string name="myprofile_header">Mein Profil</string>
+
+
+    <string name="importcontact_header">Kontakt importieren</string>
+    <string name="importcontact_search_hint">Nach Profil suchen</string>
+    <string name="error_savephoto">Fehler beim Verarbeiten des Photos!</string>
+
+    <string name="contactdetail_name">Username</string>
+    <string name="contactdetail_number">Nummer</string>
+    <string name="contactdetail_bands">Verknüpfte Bands</string>
+
+    <string name="banddetail_name">Bandname</string>
+    <string name="banddetail_style">Style</string>
+
+    <string name="contactsearch_info">Suche nach Gigger! Kontakten</string>
+    <string name="auth_loading">Einen Moment bitte...</string>
+
+    <!-- login -->
+    <string name="splashcbTitle">Wilkommen!</string>
+    <string name="splachcbText">Wilkommen bei Gigger! Wenn du dich das erste mal Gigger benutzt,
+        musst du dich einloggen, damit dein Inventar und deine Kontakte mit der Cloud Synchronisiert werden können.
+        Du kannst auch einfach OK drücken, dann wird Gigger versuchen, dich automatisch einzuloggen.
+        Du kannst deinen Account später noch ändern bzw. Ihn mit deinem Google Account oder deiner E-Mail verknüpfen.</string>
+    <string name="splash_cb_choose">Login automatisch auswählen</string>
+
+    <string name="auth_choose_method">Login wählen</string>
+    <string name="auth_welcome_loggedIN">Du bist Angemeldet</string>
+    <string name="autch_welcome_main_email">E-Mail Anmeldung</string>
+    <string name="autch_welcome_main_remailreg">Registrierung</string>
+
+    <string name="auth_choose_methhint_loggedin">Du bist eingeloggt und kannst Gigger mit deinem Account benutzen.</string>
+    <string name="auth_choose_methhint_loggedanonym">Du bist automatisch angemeldet. Du kannst deinen Account jederzeit mit deiner Email etc. verknüpfen.</string>
+
+    <string name="auth_choose_methhint">Du kannst dich mit deinem Google-Account oder per Email einloggen.</string>
+    <string name="auth_choose_method_emailhint">Hier kannst du dich per E-Mail bei Gigger! anmelden.</string>
+    <string name="auth_choose_method_emailregisterhint">Registriere dich per E-Mail, um dich bei Gigger einzuloggen.</string>
+
+    <string name="auth_choose_method_emailbtt">Mit E-Mail Adresse einloggen</string>
+    <string name="auth_choose_method_newAccount">Neuen Account erstellen</string>
+    <string name="auth_choose_method_googleklick">Über Google einloggen</string>
+    <string name="auth_choose_method_yourlogin">aktuell angemeldeter als</string>
+    <string name="auth_choose_method_yourlogin_email">(per E-Mail)</string>
+    <string name="auth_choose_method_yourlogin_google">(über Google)</string>
+    <string name="auth_choose_method_yourlogin_anonymous">(per auto-Login)</string>
+
+    <string name="auth_signOut">Abmelden</string>
+    <string name="auth_new_login">Neu anmelden</string>
+    <string name="auth_new_loginAnonym">Gigger mit Account verknüpfen</string>
+    <string name="auth_more_possibilities">Weitere Möglichkeiten</string>
+
+    <string name="auth_btn_back">Zurück zum Menü</string>
+    <string name="auth_btn_forgot_password">Passwort vergessen?</string>
+    <string name="auth_email_log_on">Anmelden</string>
+    <string name="auth_action_sign_in_short">Per Email registrieren</string>
+    <string name="auth_hint_password">Passwort</string>
+    <string name="auth_email">E-Mail</string>
+
+    <string name="auth_enter_email">Bitte gebe eine korrekte E-Mail Adresse ein</string>
+    <string name="auth_enter_email_anmeldung">E-Mail zum Anmelden eingeben</string>
+    <string name="auth_failed">Anmeldung fehlgeschlagen! Hast du deine Daten korrekt eingegeben?</string>
+    <string name="auth_enter_pass">Passwort eingeben</string>
+    <string name="auth_enter_pass_Notthesame">Die Passwörter stimmen nicht Überein!</string>
+    <string name="auth_pass_short">Das Passwort ist zu kurz, bitte gebe mindestens 5 Zeichen ein!</string>
+
+    <string name="auth_sendemail">Wir haben dir eine Mail geschickt, in der du ein neues Passwort wählen kannst!</string>
+    <string name="auth_sendemail_fail">Konnte die E-Mail nicht verschicken. Hast du die E-Mail Adresse korrekt eingegeben?</string>
+    <string name="auth_failed_tech">Anmeldung fehlgeschlagen!</string>
+    <string name="auth_register_fail_name">Konnte bei der Registrierung den Namen nicht einfügen</string>
+    <string name="auth_failed_tech_fb">Firebase Anmeldung fehlgeschlagen!</string>
+    <string name="auth_failed_tech_googleconn">Google Verbindung fehlgeschlagen!</string>
+    <string name="auth_failed_anonymous">Die automatische Anmeldung ist fehlgeschlagen!</string>
+    <string name="auth_failed_anonymous_clickprofile">Für die automatische Anmeldung kannst du dein Profil nicht bearbeiten. Bitte nutze einen festen Account, um dich neu anzumelden.</string>
+    <string name="auth_backToProfile">Zurück zum Profil</string>
+
+    <string name="auth_really_loglout_anonymoustitle">Wollen Sie wirklich ausloggen?</string>
+    <string name="auth_really_loglout_anonymous">Wollen Sie sich wirklich bei Gigger ausloggen? \n
+        Sie sind zurzeit automatisch angemeldet, d.h. Sie haben keine festen logindaten.
+        Sollten Sie sich nun ausloggen wird ihr automatischer Account gelöscht, d.h. ALLE GIGGER DATEN GEHEN VERLOREN.
+        Um Ihre Daten zu behalten, registrieren Sie sich per email (Klick auf neu anmelden).
+        Ihr automatischer Account wird dann zu einem festen Account umgezoggen.</string>
+    <string name="auth_really_loglout_anonymous_understand">Ja, ich habe das Risiko verstanden!</string>
+    <string name="auth_really_loglout_anonymous_haken">Sie Müssen den haken betätigen, um Ihren automatischen account zu löschen.</string>
+
+    <string name="editcat_fail_input">Deine Eingabe ist nicht komplett.. Du brauchts ein Bild, ein Name und eine Beschreibung für deine neue Kategorie</string>
+    <string name="editcat_fail_input_upload">Der Upload ist fehlgeschalgen!</string>
+    <string name="editCat_createsuccess">Kategorie erstellt!</string>
+    <string name="main_category">Hauptkategorie</string>
+
+    <string name="edit_cat_altered">Änderungen wurden Übernommen!</string>
+    <string name="edit_cat_altered_pic">Änderungen Übernommen und neues Bild hochgeladen...</string>
+
+
+    <!-- basics -->
+    <string name="btt_ok">OK</string>
+    <string name="btt_abort">Abbrechen</string>
+    <string name="btt_abort2">Nein, Besser doch nicht!</string>
+    <string name="btt_no">Nein</string>
+    <string name="save">Speichern</string>
+    <string name="abort">Abbrechen</string>
+    <string name="upload_running">Bild hochladen...</string>
+    <string name="upload_running_justSave">Speichern...</string>
+    <string name="no_child_cat">Keine Gegenstände vorhanden.. Klicke länger auf mich, dann kommt die Option!</string>
+    <string name="upload_running_countpics">Bild: </string>
+    <string name="upload_complete1_text"> Alle Bilder hochgeladen.</string>
+    <string name="upload_complete1">Hochladen fertig</string>
+    <string name="upload_failture">Fehler beim Upload</string>
+    <string name="upload_failture_notep1">Konnte Datei "</string>
+    <string name="upload_failture_notep2">" nicht hochladen</string>
+
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editCat"
+        android:alphabeticShortcut="b"
+        android:title="@string/title_EquipEditorActivity_editCat" />
+
+    <item
+        android:id="@+id/delCat"
+        android:alphabeticShortcut="l"
+        android:title="@string/title_EquipEditorActivity_delCat" />
+
+    <item
+        android:id="@+id/catCategoryManager"
+        android:alphabeticShortcut="m"
+        android:title="@string/EquipmentManager" />
+
+    <item
+        android:id="@+id/crItem1"
+        android:alphabeticShortcut="c"
+        android:title="@string/title_EquipEditorActivity_crItem"
+        android:visible="false"/>
+</menu>

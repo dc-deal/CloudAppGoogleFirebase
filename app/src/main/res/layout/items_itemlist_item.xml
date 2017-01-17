@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/show_loggedinUser"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/contlist_minItemheight"
+    android:background="@color/grayOverdubLight"
+    android:maxHeight="@dimen/contlist_minItemheight"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/contlist_itemmargin"
+    android:paddingTop="@dimen/contlist_itempadding"
+    android:paddingBottom="@dimen/contlist_itempadding"
+    android:paddingRight="@dimen/contlist_itempadding"
+    android:paddingLeft="@dimen/contlist_itemLeftPadding"
+    >
+
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/itemlist_textview_image"
+        android:layout_height="wrap_content"
+        android:layout_width="@dimen/BandList_profileColumn"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_vertical"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/contlist_itemTextLeftPadding"
+        android:text=""
+        android:textSize="15sp"
+        android:textStyle=""
+        android:layout_gravity="center_vertical">
+        <TextView android:text="First"
+            android:id="@+id/itemlist_textview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:paddingBottom="2dp"></TextView>
+        <TextView android:textColor="@android:color/darker_gray"
+            android:text="Second"
+            android:layout_height="wrap_content"
+            android:id="@+id/itemlist_textview_desc"
+            android:layout_width="wrap_content"
+            android:textSize="13dp"></TextView>
+    </LinearLayout>
+</LinearLayout>

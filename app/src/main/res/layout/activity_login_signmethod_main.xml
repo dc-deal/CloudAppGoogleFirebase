@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- anmeldearten -->
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:gravity="center"
+            android:text="@string/auth_choose_method_googleklick" />
+
+        <com.google.android.gms.common.SignInButton
+            style="@style/AppTheme.googlebttstyle"
+            android:id="@+id/sign_in_button_google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:gravity="center"
+        android:text="@string/auth_more_possibilities" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_marginTop="0dp"
+        android:id="@+id/sign_in_button_email"
+        style="@style/AppTheme.mybttstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_login"
+        android:text="@string/auth_choose_method_emailbtt" />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/sign_in_button_newaccount"
+        style="@style/AppTheme.mybttstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_addascount"
+        android:text="@string/auth_choose_method_newAccount" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/sign_in_button_toProfile"
+        style="@style/AppTheme.mybttstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_new_account"
+        android:text="@string/auth_backToProfile"
+        android:visibility="gone"/>
+
+</LinearLayout>

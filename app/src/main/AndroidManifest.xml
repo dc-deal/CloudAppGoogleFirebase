@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.livingrecordings.giggermainapp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-sdk tools:overrideLibrary="com.doodle.android.chips"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="true"
+        >
+
+        <activity
+            android:name=".LoginScreens.SplashActivity"
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ItemListActivity"/>
+        <activity android:name=".EquipEditor.EquipEditorActivity"/>
+        <activity android:name=".BandEditor.BandEditorActivity"/>
+        <activity android:name=".BandEditor.ImportSingleContactActivity"/>
+        <activity android:name=".BandEditor.ShowContactDetailActivity"/>
+        <activity android:name=".SettingsActivity"/>
+        <activity android:name=".LoginScreens.LoginActivity"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="net.livingrecordings.giggermainapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
+
+        <!-- Job sceduler thang..-->
+        <service android:name=".giggerMainClasses.services.AppJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Job sceduler thang.. google jcm für die früheren versionen.-->
+        <service
+            android:name=".giggerMainClasses.services.AppGcmJobService"
+            android:exported="true"
+            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
+            <intent-filter>
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

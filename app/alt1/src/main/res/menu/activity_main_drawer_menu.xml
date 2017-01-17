@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_equipment"
+            android:icon="@drawable/miscbox"
+            android:title="@string/Equipment" />
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_contacts"
+            android:title="@string/BandsAndContacts" />
+    </group>
+
+    <item android:title="@string/untertitel_menuunten">
+        <menu>
+
+            <item
+                android:id="@+id/nav_share_equip"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/ShareItem" />
+            <item
+                android:id="@+id/nav_contUser"
+                android:icon="@drawable/contact"
+                android:title="@string/ContactGUser" />
+        </menu>
+    </item>
+
+</menu>

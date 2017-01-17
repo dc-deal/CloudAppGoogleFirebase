@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editEquip"
+        android:alphabeticShortcut="b"
+        android:title="@string/title_EquipEditorActivity_editItem" />
+    <item
+        android:id="@+id/delEquip"
+        android:alphabeticShortcut="c"
+        android:title="@string/title_EquipEditorActivity_delItem" />
+
+    <item
+        android:id="@+id/crItem1"
+        android:alphabeticShortcut="c"
+        android:title="@string/title_EquipEditorActivity_crItem"
+        android:visible="false"/>
+</menu>

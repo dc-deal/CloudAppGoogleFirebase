@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:style="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/viewA"
+            style="@style/AppTheme.header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.45"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/EquipEditorActivity_showItemTitleView"
+                style="@style/AppTheme.header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/showitem_margin"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/showitem_topMargin"
+            android:layout_marginLeft="@dimen/showitem_margin"
+            android:layout_marginBottom="@dimen/edits_margin"
+            android:layout_marginRight="@dimen/edits_margin"
+            android:layout_weight="0.1"
+            android:orientation="vertical">
+            <!-- holo_orange_light -->
+            <!-- hier das layout für das anzeigen eines items. -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/edits_margin">
+<!--
+              <ImageView
+                    android:id="@+id/WidgetIcon"
+                    android:src="@android:drawable/ic_menu_always_landscape_portrait"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:paddingTop="3dip"
+                    android:layout_weight="2"
+                    />
+-->
+
+                <TextView
+                    style="@style/AppTheme.mytextviewstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="end"
+                    android:text="@string/title_EquipEditorActivity_eqCaption" />
+
+
+
+                <TextView
+                    android:id="@+id/viewItemName"
+                    style="@style/AppTheme.mytextviewstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:paddingBottom="@dimen/edits_margin">
+
+                <TextView
+                    style="@style/AppTheme.mytextviewstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="end"
+                    android:text="@string/title_EquipEditorActivity_eqDesc" />
+
+                <TextView
+                    android:id="@+id/viewItemDesc"
+                    style="@style/AppTheme.mytextviewstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/edits_margin">
+
+                <TextView
+                    style="@style/AppTheme.mytextviewstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="end"
+                    android:text="@string/title_EquipEditorActivity_eqCat" />
+
+                <TextView
+                    android:id="@+id/viewItemParCat"
+                    style="@style/AppTheme.mytextviewstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/viewA"
+        app:layout_anchorGravity="bottom|left|end"
+        android:paddingLeft="@dimen/showitem_margin">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_editItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            fab:fab_label="@string/title_EquipEditorActivity_crItem"
+            fab:fab_size="mini" />
+<!--
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_deleteitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_delete"
+            app:backgroundTint="#d20b0d"
+            app:fabSize="mini"
+            app:pressedTranslationZ="12dp" />
+
+            War mal eine idee so kann man fabs nebeneineander packen
+            -->
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

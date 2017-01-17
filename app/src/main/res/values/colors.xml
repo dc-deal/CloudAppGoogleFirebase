@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffc107</color>
+    <color name="colorPrimary2">#FFA000</color>
+    <color name="colorPrimaryDark">#212121</color>
+    <color name="colorAccent">#212121</color>
+    <color name="red1">#FF5722</color>
+    <color name="grayOverdub">#d8ffffff</color>
+    <color name="grayOverdubLight">#c5ffffff</color>
+    <color name="maintab_unselected_text_color">#ffffff</color>
+    <color name="maintab_selected_text_color">@color/colorPrimaryDark</color>
+    <color name="maintab_selected_indicator_color">@color/colorPrimaryDark</color>
+    <color name="transparent">#00ffffff</color>
+
+
+    <color name="primary_dark">#FFA000</color>
+
+    <!-- fbase colors -->
+
+    <color name="white">#ffffff</color>
+
+    <!-- schrift log:
+    SF Espresso Shack Condensed, Italic
+
+    -->
+
+</resources>

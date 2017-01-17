@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="net.livingrecordings.giggermainapp.MainActivity"
+    tools:showIn="@layout/main_app_bar">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary2"
+            android:elevation="7dp"
+            android:minHeight="?attr/actionBarSize"
+            app:tabTextColor="@color/maintab_unselected_text_color"
+            app:tabSelectedTextColor="@color/maintab_selected_text_color"
+            app:tabIndicatorColor="@color/maintab_selected_indicator_color"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/tab_layout_main"/>
+
+</RelativeLayout>

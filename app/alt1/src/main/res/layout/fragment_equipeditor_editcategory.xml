@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:weightSum="1">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/catImageSelect"
+                android:layout_width="match_parent"
+                android:layout_height="187dp"
+                android:cropToPadding="false"
+                android:elevation="5dp"
+                app:srcCompat="@color/white"
+                android:layout_marginBottom="@dimen/edits_margin"
+                android:src="@drawable/imgplaceholder"
+                android:background="@color/grayOverdub"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/edits_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/title_EquipEditorActivity_catName" />
+
+                <EditText
+                    android:id="@+id/EquipEditorActivity_editcatName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/title_EquipEditorActivity_catNameHint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="119dp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/edits_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.8"
+                    android:text="@string/title_EquipEditorActivity_catDesc"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
+
+                <EditText
+                    android:id="@+id/EquipEditorActivity_editcatDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title_EquipEditorActivity_catDescHint"
+                    android:layout_weight="0.94" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/edits_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/choose_cat" />
+
+                <Button
+                    android:id="@+id/choose_cat_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/choose_cat_add"/>
+            </LinearLayout>
+
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
+                android:text="@string/add_new"
+                android:id="@+id/new_entry_button"
+                android:background="@color/red1"
+                android:textColor="@android:color/white"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:visibility="gone"
+                />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

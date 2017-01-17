@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "855844648147",
+    "firebase_url": "https://gigbackend.firebaseio.com",
+    "project_id": "gigbackend",
+    "storage_bucket": "gigbackend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855844648147:android:d60a1611e7c2d7fe",
+        "android_client_info": {
+          "package_name": "net.livingrecordings.giggermainapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855844648147-ge02m008iq1jcjjm6iq3ili122ajosbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.livingrecordings.giggermainapp",
+            "certificate_hash": "F591D99AD596FCA04C4DEE52375B6A2CF833E760"
+          }
+        },
+        {
+          "client_id": "855844648147-l19cld319bkbum4t0o2kt04dcvcl5ci5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOsa8uBOtfbCBBdlX7HaznXT8tlFtkEE0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855844648147-l19cld319bkbum4t0o2kt04dcvcl5ci5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

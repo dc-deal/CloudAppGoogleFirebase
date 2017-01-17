@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!-- HIER GEÄNDET!! LAYOUT_HEIGHT MUSS MATCH PARENT.. ABER EGAL ERSTMAL! -.- -->
+    <ImageView
+        android:id="@+id/splash_img"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+
+
+    <!-- die ist für den dialog -.- -->
+    <CheckBox
+        android:id="@+id/checkbox"
+        style="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/splash_cb_choose"
+        android:visibility="gone" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bttSplash1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ITEM NEU eintragen" />
+
+        <Button
+            android:id="@+id/bttSplash2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item List"/>
+
+        <Button
+            android:id="@+id/bttSplash3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zu Main activity" />
+        <Button
+            android:id="@+id/bttSplash4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zum Login" />
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/crEquip"
+        android:alphabeticShortcut="a"
+        android:title="@string/title_EquipEditorActivity_crItem" />
+
+    <item
+        android:id="@+id/equipManager"
+        android:alphabeticShortcut="c"
+        android:title="@string/EquipmentManager" />
+</menu>
