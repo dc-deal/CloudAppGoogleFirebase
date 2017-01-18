@@ -18,8 +18,7 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class ItemClass implements Serializable {
 
-    private String name, searchName, desc, parCat,createdBy,galleryPic;
-    private HashMap<String,Boolean> imgs = new HashMap<>();
+    private String name, searchName, desc, createdBy;
     private HashMap<String,Boolean> tags = new HashMap();
     private boolean isPublished = false;
    // dann wird sie so abgespreichertn. vorteil: bilder die shcon da sind werden nicht neu hochgeladen.
@@ -29,7 +28,8 @@ public class ItemClass implements Serializable {
     private String key;
     @Exclude
     private ArrayList<ImagesClass> uploadImages = new ArrayList<>();
-
+    @Exclude
+    private ArrayList<ImagesClass> deleteList = new ArrayList<>();
 
     public ItemClass() {
         // STD .must have for FB
@@ -37,14 +37,11 @@ public class ItemClass implements Serializable {
 
     // LIGHTWEIGHT FIREBASE CONSTRUCTOR...
     // NO FUNCTIONALITY HERE!!!
-    public ItemClass(String name, String searchName, String desc, String parCat, String galleryPic, HashMap<String, Boolean> imgs,
+    public ItemClass(String name, String searchName, String desc,
                      HashMap<String, Boolean> tags, String createdBy, boolean isPublished) {
         this.name = name;
         this.searchName = searchName;
         this.desc = desc;
-        this.parCat = parCat;
-        this.galleryPic = galleryPic;
-        this.imgs = imgs;
         this.createdBy = createdBy;
         this.isPublished = isPublished;
     }
@@ -66,28 +63,12 @@ public class ItemClass implements Serializable {
         this.desc = desc;
     }
 
-    public String getParCat() {
-        return parCat;
-    }
-
-    public void setParCat(String parCat) {
-        this.parCat = parCat;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public HashMap<String,Boolean> getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(HashMap<String,Boolean> imgs) {
-        this.imgs = imgs;
     }
 
     public Map<String, Boolean> getTags() {
@@ -143,15 +124,28 @@ public class ItemClass implements Serializable {
                 equalFound = true;
             }
         }
-        if (equalFound){
+        if (!equalFound){
             uploadImages.add(upImg);
             return true;
         }
         return added;
     }
     @Exclude
+    public void addDeletePic(Uri upImg){
+        deleteList.add(new ImagesClass(false,upImg.toString(),0)); // das image Objekt ist hier wohl eher ein dummy.
+    }
+
+    @Exclude
+    public void addDeletitionPicture(Uri inpUrl) {
+        this.deleteList.add(new ImagesClass(false,inpUrl.toString(),0));
+    }
+    @Exclude
     public ArrayList<ImagesClass> getUploadImages(){
         return uploadImages;
+    }
+    @Exclude
+    public ArrayList<ImagesClass> getDeletitionImages(){
+        return deleteList;
     }
 
     public String getSearchName() {
@@ -170,11 +164,4 @@ public class ItemClass implements Serializable {
         isPublished = published;
     }
 
-    public String getGalleryPic() {
-        return galleryPic;
-    }
-
-    public void setGalleryPic(String galleryPic) {
-        this.galleryPic = galleryPic;
-    }
 }

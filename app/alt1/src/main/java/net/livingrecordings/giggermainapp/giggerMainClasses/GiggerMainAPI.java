@@ -152,7 +152,7 @@ public class GiggerMainAPI {
         JobManager mJobManager;
 
         public SaveItemService() {
-            super("GiggerMainAPI");
+            super("GiggerItemAPI");
         }
 
         @Override
@@ -244,13 +244,13 @@ public class GiggerMainAPI {
                         Uri inpImgUri = Uri.parse(inpItem.newImagesInput.get(i).toString());
                         for (DataSnapshot thisImgUrl : dataSnapshot.getChildren()) {
                             DatabaseReference ref = thisImgUrl.getRef();
-                            ref.child("isGallery").removeValue();
+                            ref.child("gallery").removeValue();
                             Uri dbImgUri = Uri.parse((String) thisImgUrl.child("imgUrl").getValue());
                             if (inpImgUri.toString().equals(dbImgUri.toString())) {
                                 // gefunden!!
                                 if (setToGallery){
                                     DatabaseReference refTemp1 = thisImgUrl.getRef();
-                                    refTemp1.child("isGallery").setValue(true);
+                                    refTemp1.child("gallery").setValue(true);
                                 }
                                 found = true;
                                 break;

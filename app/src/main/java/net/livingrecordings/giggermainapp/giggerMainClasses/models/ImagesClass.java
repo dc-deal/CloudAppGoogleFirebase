@@ -12,23 +12,21 @@ import java.io.Serializable;
 @IgnoreExtraProperties
 public class ImagesClass implements Serializable {
 
-    private boolean isGallery;
+    private boolean gallery;
     private String imgUri;
     private int order;
 
-    public ImagesClass(boolean isGallery, String imgUri, int order) {
-        this.isGallery = isGallery;
+    public ImagesClass(){
+
+    }
+
+    public ImagesClass(boolean gallery, String imgUri, int order) {
+        this.gallery = gallery;
         this.imgUri = imgUri;
         this.order = order;
     }
 
-    public boolean isGallery() {
-        return isGallery;
-    }
 
-    public void setGallery(boolean gallery) {
-        isGallery = gallery;
-    }
 
     public String getImgUri() {
         return imgUri;
@@ -44,5 +42,13 @@ public class ImagesClass implements Serializable {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public boolean isGallery() {
+        return gallery;
+    }
+
+    public void setGallery(boolean gallery) {
+        this.gallery = gallery;
     }
 }

@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 
 import net.livingrecordings.giggermainapp.R;
@@ -148,7 +147,7 @@ public class EquipEditItemFragment extends Fragment implements ItemInterfaceHelp
     }
 
     public void save(){
-        thisItem.saveItem();
+        thisItem.saveItemFromInterface();
     }
 
     public View.OnClickListener onCrClick = new View.OnClickListener() {

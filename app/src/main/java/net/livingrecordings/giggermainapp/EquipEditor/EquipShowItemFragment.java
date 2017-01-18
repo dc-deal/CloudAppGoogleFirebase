@@ -16,7 +16,7 @@ import android.widget.ImageView;
 
 import net.livingrecordings.giggermainapp.R;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
-import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.ItemImageCasheHelper;
+import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.LoadImageCasheHelper;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.ItemInterfaceHelper;
 
 import static android.content.Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP;
@@ -39,7 +39,7 @@ public class EquipShowItemFragment extends Fragment {
         View imgLayout = getActivity().getLayoutInflater().inflate(R.layout.fragment_equipeditor_showitem_imagefullscreen
                 , null);
         ImageView img = (ImageView)imgLayout.findViewById(R.id.dialogFullscreenImgView);
-        ItemImageCasheHelper.getInstance().loadImage_Cashed(getActivity(),img,thisItem.getKey(),thisItem.getCurrentItem().getGalleryPic());
+        LoadImageCasheHelper.getInstance().loadGalleryImage_Cashed(getActivity(),img,thisItem.getKey());
         settingsDialog.setContentView(imgLayout);
         return settingsDialog;
     }

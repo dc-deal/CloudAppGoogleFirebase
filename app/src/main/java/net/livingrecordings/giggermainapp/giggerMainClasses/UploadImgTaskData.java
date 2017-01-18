@@ -2,12 +2,7 @@ package net.livingrecordings.giggermainapp.giggerMainClasses;
 
 import android.net.Uri;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.StorageReference;
-
-import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.UriHelper;
-
-import java.util.Date;
+import net.livingrecordings.giggermainapp.giggerMainClasses.models.ImagesClass;
 
 /**
  * Created by Kraetzig Neu on 22.12.2016.
@@ -17,16 +12,16 @@ import java.util.Date;
 public class UploadImgTaskData {
     // man kann dem uploader so einen task geben un der wird es für die Aufgabe einfügen...
     private Uri fileToUpload;
-    private boolean isGlleryPic;
+    private ImagesClass ImageC;
     private String nameOfItem;
     private String dbKey;
 
 
-    public UploadImgTaskData(String Name,String dbKey, Uri fileToUpload, Boolean isGlleryPic) {
+    public UploadImgTaskData(String Name,String dbKey, Uri fileToUpload, ImagesClass imageC) {
         this.dbKey = dbKey;
         this.nameOfItem = Name;
         this.fileToUpload = fileToUpload;
-        this.isGlleryPic = isGlleryPic;
+        this.ImageC = imageC;
     }
 
 
@@ -39,12 +34,12 @@ public class UploadImgTaskData {
         this.fileToUpload = fileToUpload;
     }
 
-    public boolean isGlleryPic() {
-        return isGlleryPic;
+    public ImagesClass isImageC() {
+        return ImageC;
     }
 
-    public void setGlleryPic(boolean glleryPic) {
-        isGlleryPic = glleryPic;
+    public void setImageC(ImagesClass imageC) {
+        ImageC = imageC;
     }
 
     public String getNameOfItem() {
@@ -55,7 +50,7 @@ public class UploadImgTaskData {
         this.nameOfItem = nameOfItem;
     }
 
-    public String getDbKey() {
+    public String getItemKey() {
         return dbKey;
     }
 

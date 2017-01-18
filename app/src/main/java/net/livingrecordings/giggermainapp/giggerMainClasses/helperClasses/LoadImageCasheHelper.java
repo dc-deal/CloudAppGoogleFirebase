@@ -14,53 +14,63 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import net.livingrecordings.giggermainapp.R;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerMainAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.models.ImagesClass;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by Kraetzig Neu on 05.01.2017.
  */
 
-public class ItemImageCasheHelper {
+public class LoadImageCasheHelper {
 
     private final static String CASHEUNIT_CONST = "CASHEUNIT_CONST";
+    public Uri mOnlineUri;
     public Uri mCashedUri;
     private ImageView mImgView;
-    private String mThisItemKey;
+    loadImageCasheHelperCallbacks callbacks;
 
-    ItemImageCasheHelper() {
+    public interface loadImageCasheHelperCallbacks{
+        void provideAllImages_asOnlineUri(ArrayList<ImagesClass> imgList);
+    }
+
+    LoadImageCasheHelper() {
 
     }
 
-    public static ItemImageCasheHelper getInstance() {
-        return new ItemImageCasheHelper();
+    public static LoadImageCasheHelper getInstance() {
+        return new LoadImageCasheHelper();
     }
 
-    public void loadImage_Cashed(final Context mContext, final ImageView imgView, final String ItemKey, final String imageUri) {
+    public void loadGalleryImage_Cashed(final Context mContext, final ImageView imgView, final String itemKey) {
         this.mImgView = imgView;
-        this.mThisItemKey = ItemKey;
-        DatabaseReference childImagePath = GiggerMainAPI.getInstance().getPrivateItemRef(ItemKey).child("imgs");
-        childImagePath.addListenerForSingleValueEvent(new ValueEventListener() {
+        GiggerItemAPI.getInstance().getGalleryImageQuery(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String thisImage = (String) ds.getValue();
-                    if (imageUri.equals(thisImage)){
-                        writeImageToLocalCashe(mContext, ItemKey, Uri.parse(thisImage));
-                        break; // found requested image...
+                    ImagesClass thisImage = ds.getValue(ImagesClass.class);
+                    if (thisImage != null) {
+                        mOnlineUri = Uri.parse(thisImage.getImgUri()); // noch online link
+                        // offlinne link ermitteln.
+                        writeImageToLocalCashe(mContext, itemKey, Uri.parse(thisImage.getImgUri()));
+                        ArrayList<ImagesClass> imgList = new ArrayList<>();
+                        imgList.add(thisImage);
+                        if (callbacks != null) {
+                            callbacks.provideAllImages_asOnlineUri(imgList);
+                        }
                     }
                 }
+
             }
 
             @Override
@@ -71,26 +81,26 @@ public class ItemImageCasheHelper {
     }
 
 
-    private File getLocalPath(String dbKey, String addFileName) {
+    private File getLocalPath(String addFileName) {
         // TODO Überlegen, ob images aus einer globalen suche nicht lieber im cahse verzeihnis gelagert werden sollen.
         // TODO mussi ch antürlich imemr beides nachgucken..
         return new File(Environment.getExternalStorageDirectory() +
-                    File.separator + "GiggerFiles" + File.separator + "cashed" + File.separator
-                    + dbKey + File.separator + addFileName);
+                    File.separator + "GiggerFiles" + File.separator + "GiggerImages" + File.separator
+                    +  addFileName);
     }
 
     private File getLocalCasheDir(String addFileName) {
         // TODO Überlegen, ob images aus einer globalen suche nicht lieber im cahse verzeihnis gelagert werden sollen.
         // TODO mussi ch antürlich imemr beides nachgucken..
         return new File(Environment.getDownloadCacheDirectory() +
-                File.separator + "GiggerFiles" + File.separator + "cashed" + File.separator + mThisItemKey + File.separator + addFileName);
+                File.separator + "GiggerFiles" + File.separator + "GiggerImages" + File.separator + addFileName);
     }
 
 
     public Uri casheImageFromUri(Context mContext, String thisItemKey, Uri localInputFile) {
         File outputFile = null;
         try {
-            final File dir = getLocalPath(thisItemKey,"");// ... & cashe file to the right directory, wich is GiggerStore ;)
+            final File dir = getLocalPath("");// ... & cashe file to the right directory, wich is GiggerStore ;)
             outputFile = new File(dir, generateUniqueIdentifier() + ".JPEG");
             outputFile.getParentFile().mkdirs();
             Bitmap bmp = BitmapConverterHelper.getInstance().resizeBitmapFromUri(mContext,localInputFile);
@@ -105,7 +115,7 @@ public class ItemImageCasheHelper {
 
 
     // schreibt bilder in einen lokalen cashe, der imemr wieder ausgelesen wird, sobald das Bild heruntergeladen ist.
-    public Uri writeImageToLocalCashe(final Context mContext, final String ItemKey, final Uri fileUri) {
+    public void writeImageToLocalCashe(final Context mContext, final String ItemKey, final Uri fileUri) {
         // check if file exists...
         mCashedUri = null;
         if (URLUtil.isValidUrl(fileUri.toString())) {
@@ -118,7 +128,7 @@ public class ItemImageCasheHelper {
                 // ref existes...
                 final String filename = storRef.getName(); // get file name...
                 // now check if file is in local cashe to prevent download task.
-                File locaFile = getLocalPath(ItemKey,filename);
+                File locaFile = getLocalPath(filename);
            /*     File locaCashedFile = getLocalCasheDir(filename);*/ // noch nicht aktiv.
                 if ((locaFile.exists())/*||(locaCashedFile.exists())*/) {
                     setAndShowImage(mContext,locaFile);
@@ -128,13 +138,13 @@ public class ItemImageCasheHelper {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             // Local temp file has been created
-                            // show if nessecary - ex. called from loadImage_Cashed...
+                            // show if nessecary - ex. called from loadGalleryImage_Cashed...
                             try {
                                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                File outputFile = getLocalPath(ItemKey,filename);
+                                File outputFile = getLocalPath(filename);
                                 outputFile.mkdirs();
                                 FileOutputStream fos = new FileOutputStream(outputFile);
-                                bmp.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                                bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
                                 fos.close(); // http://stackoverflow.com/questions/15662258/how-to-save-a-bitmap-on-internal-storage
                                 setAndShowImage(mContext,outputFile);
                                 //  TODO Note: It might be wise to use Environment.getExternalStorageDirectory()
@@ -158,7 +168,6 @@ public class ItemImageCasheHelper {
                 }
             }
         } // TODO noch kein else zweig. aber eigentlich werde ich die bielder heir auslesen und abgleichen mit der online verion..
-        return mCashedUri;
     }
 
 

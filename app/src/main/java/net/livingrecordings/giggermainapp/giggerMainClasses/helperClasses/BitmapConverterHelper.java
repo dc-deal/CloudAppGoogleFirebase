@@ -1,34 +1,17 @@
 package net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static android.R.attr.data;
-import static net.livingrecordings.giggermainapp.giggerMainClasses.GiggerMainAPI.MAX_GLOBALFILE_SIZE;
+import static net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI.MAX_GLOBALFILE_SIZE;
 
 /**
  * Created by Kraetzig Neu on 15.11.2016.

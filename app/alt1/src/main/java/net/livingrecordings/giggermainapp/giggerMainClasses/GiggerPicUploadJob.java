@@ -213,7 +213,7 @@ public class GiggerPicUploadJob extends Job {
             DatabaseReference thisImgRef = thisTask.getReferenceToWriteTo().push().getRef();
             thisImgRef.child("imgUrl").setValue(durl.toString());
             if (thisTask.isGlleryPic()) {
-                thisImgRef.child("isGallery").setValue(true);
+                thisImgRef.child("gallery").setValue(true);
             }
             completeNotification(mContext.getString(R.string.editCat_createsuccess));
         }

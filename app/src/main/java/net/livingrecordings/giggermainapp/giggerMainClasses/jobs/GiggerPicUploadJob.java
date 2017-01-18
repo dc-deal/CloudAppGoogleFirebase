@@ -16,10 +16,6 @@ import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -28,9 +24,9 @@ import com.google.firebase.storage.UploadTask;
 import net.livingrecordings.giggermainapp.MainActivity;
 import net.livingrecordings.giggermainapp.R;
 import net.livingrecordings.giggermainapp.giggerMainClasses.Exceptions.GiggerPicUploadException;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerMainAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.UploadImgTaskData;
-import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClass;
+import net.livingrecordings.giggermainapp.giggerMainClasses.models.ImagesClass;
 
 import java.io.File;
 import java.util.concurrent.CountDownLatch;
@@ -83,7 +79,13 @@ public class GiggerPicUploadJob extends Job {
         @Override
         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
             Uri durl = taskSnapshot.getDownloadUrl();
-            GiggerMainAPI.getInstance().addItemImage(thisTask,durl);
+            ImagesClass img = new ImagesClass(
+                    thisTask.isImageC().isGallery(),
+                    durl.toString(),
+                    thisTask.isImageC().getOrder()
+            );
+            GiggerItemAPI.getInstance().getImagesRef(thisTask.getItemKey()).push().setValue(img);
+            GiggerItemAPI.getInstance().getPrivateItemRef(thisTask.getItemKey()).child("imgUpdated").setValue(true); // grids updaten.-
             completeNotification(mContext.getString(R.string.editItem_uploadsucsess));
             loginLatch.countDown();
         }
@@ -111,7 +113,7 @@ public class GiggerPicUploadJob extends Job {
         // cashes the input file to local gigger dir and
         File tmpFile = new File(thisTask.getFileToUpload().toString());
         String fileName = tmpFile.getName();
-        StorageReference sr = GiggerMainAPI.getInstance().getItemStorageRef(thisTask.getDbKey());
+        StorageReference sr = GiggerItemAPI.getInstance().getItemStorageRef(thisTask.getItemKey());
         uploadTask = sr.child(fileName).putFile(thisTask.getFileToUpload());
         uploadTask.addOnSuccessListener(succListenr)
                 .addOnFailureListener(failListener)

@@ -23,10 +23,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerMainAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClass;
-import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.ItemImageCasheHelper;
+import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.LoadImageCasheHelper;
 import static net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass.equipIdent_CATEGORY;
 
 /**
@@ -46,11 +46,11 @@ public class ItemListFragment extends Fragment {
         ((TextView) view.findViewById(R.id.itemlist_textview_name)).setText(item.getName());
         ((TextView) view.findViewById(R.id.itemlist_textview_desc)).setText(item.getDesc());
         // noch das bild... dafür den cashe anzapfen ( managed die unit automatisch)
-        ItemImageCasheHelper.getInstance()
-                .loadImage_Cashed(
+        LoadImageCasheHelper.getInstance()
+                .loadGalleryImage_Cashed(
                         getActivity(),
                         (ImageView) view.findViewById(R.id.itemlist_textview_image),
-                        item.getDbKey(),item.getGalleryPic());
+                        item.getDbKey());
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ItemListFragment extends Fragment {
                 }
             }
 
-            GiggerMainAPI gi = GiggerMainAPI.getInstance();
+            GiggerItemAPI gi = GiggerItemAPI.getInstance();
             Query fbQ = gi.getCreatedByUserQuery();
 
             // check if empty..
@@ -158,7 +158,7 @@ public class ItemListFragment extends Fragment {
                 ghc.intentEditItem(itemIdent);
                 return true;
             case R.id.delEquip:
-                GiggerMainAPI.getInstance().removeItem(itemIdent);
+                GiggerItemAPI.getInstance().removeItem(itemIdent);
                 return true;
             case R.id.equipManager:
                 Log.i("ContextMenu", "Item 1b was chosen");

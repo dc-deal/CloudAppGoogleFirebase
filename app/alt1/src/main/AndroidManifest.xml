@@ -51,7 +51,7 @@
 
 
         <service
-            android:name=".giggerMainClasses.GiggerMainAPI"
+            android:name=".giggerMainClasses.GiggerItemAPI"
             android:exported="false"/>
 
     </application>

@@ -19,20 +19,21 @@ import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClass;
 
 public class FragmentMainEquipListAdapter extends FirebaseListAdapter<ItemClass>  {
     private Context mContext;
-    private String parCatFromPopView;
+ //   private String parCatFromPopView;
 
     public FragmentMainEquipListAdapter(Query ref, Activity activity, int layout) {
         super(activity, ItemClass.class, layout, ref);
-        parCatFromPopView = ref.getRef().getKey();
+  //      parCatFromPopView = ref.getRef().getKey();
         mContext = activity;
     }
 
     public String getParCat(){
         // TODO eigentlich muss hier ein callback rein..und interface .. später
-        if (parCatFromPopView.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-            return "root";
-        } else
-          return parCatFromPopView;
+    //    if (parCatFromPopView.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+    //        return "root";
+     //   } else
+    //      return parCatFromPopView;
+        return "";
     }
 
 
@@ -53,7 +54,7 @@ public class FragmentMainEquipListAdapter extends FirebaseListAdapter<ItemClass>
     //            .error(R.drawable.erroricon).into(img);
         // hier könnte ich noch ein desc feld einfügen...
 
-        parCatFromPopView = catClass.getParCat();
+  //      parCatFromPopView = catClass.getParCat();
     }
 
 }
