@@ -43,12 +43,11 @@ public class GiggerItemAPI {
     public static final String ITEMPATH_PRIVATE = "ITEMPATH_PRIVATE";
     public static final String ITEMPATH_IMAGES = "IMAGES";
     public static final String TAGS_PUBLISHED = "TAGS";
-    public static final String BANDS_PUBLISHED = "BANDS_PUBLISHED";
-    public static final String USERS_PUBLISHED = "USERS_PUBLISHED";
+
+
     // INDEX
     public static final String INDEXES = "INDEXES";
     public static final String TAGITEMS_LOCAL_ALLTAGS_INDEX = "TAGITEMS_LOCAL_ALLTAGS_INDEX";
-    public static final String BANDS_GLOBAL_NAMESEARCH_INDEX = "BANDS_GLOBAL_NAMESEARCH_INDEX";
     public static final String JOB_MANAGER_UPLOADS = "UploadJobsGiggerAPI";
     // LOGS
     public static final String GIGGERMAINAPI_SAVE_ERROR = "GIGGER_SAVEI_ERROR";
