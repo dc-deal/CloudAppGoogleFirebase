@@ -5,7 +5,7 @@
 
         <item
             android:id="@+id/nav_equipment"
-            android:icon="@drawable/miscbox"
+            android:icon="@drawable/ic_equipment"
             android:title="@string/Equipment" />
         <item
             android:id="@+id/nav_contacts"
@@ -22,7 +22,7 @@
                 android:title="@string/ShareItem" />
             <item
                 android:id="@+id/nav_contUser"
-                android:icon="@drawable/contact"
+                android:icon="@drawable/ic_contact"
                 android:title="@string/ContactGUser" />
         </menu>
     </item>

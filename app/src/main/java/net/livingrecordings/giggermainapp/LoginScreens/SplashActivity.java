@@ -20,20 +20,20 @@ import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.Gigger
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.TimingLogger;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -78,12 +78,6 @@ public class SplashActivity extends AppCompatActivity{
         }
     };
 
-    View.OnClickListener bttSplash2itemlist = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        GiggerIntentHelperClass.getInstance(mContext).intentShowItemList("");
-        }
-    };
     View.OnClickListener bttSplash4ClickLogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -138,18 +132,24 @@ public class SplashActivity extends AppCompatActivity{
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public void loginWorkflow(){
+    public void checkIfLoggedIn(){
         // "default loginworkflow"
         //-------------------------------
-        Boolean uThere = FirebaseAuth.getInstance().getCurrentUser() != null;
-        if (uThere) {
-            // ALL OK!
-            //  bttSplash1Click.onClick(null);
-            bttSplash2itemlist.onClick(this.findViewById(R.id.bttSplash2));
-        }else {
-            showQuestion();
-        }
-
+        FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                Boolean uThere = FirebaseAuth.getInstance().getCurrentUser() != null;
+                if (uThere) {
+                    // ALL OK!
+                    //  bttSplash1Click.onClick(null);
+                    //bttSplash2itemlist.onClick(this.findViewById(R.id.bttSplash2)); // zu dem items.
+                    handler.sendEmptyMessageDelayed(0, SPLASH_DISPLAY_LENGTH);
+                }else {
+                    showQuestion();
+                }
+            }
+        });
     }
     public void noInternetWorkflowExecute(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -160,7 +160,7 @@ public class SplashActivity extends AppCompatActivity{
                     public void onClick(DialogInterface dialog, int id) {
                         if (isOnline()){
                             dialog.dismiss();
-                            loginWorkflow();
+                            checkIfLoggedIn();
                         }
                     }
                 })
@@ -173,44 +173,39 @@ public class SplashActivity extends AppCompatActivity{
         builder.show();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.gigger_splash);
-        mContext = this;
 
-        Button crPostRecords = (Button) this.findViewById(R.id.bttSplash4);
-        crPostRecords.setOnClickListener(bttSplash4ClickLogin);
-
-
-        Button btt10 = (Button) this.findViewById(R.id.bttSplash3);
-        btt10.setOnClickListener(bttSplash3MainActivityClick);
-
-        Button searchst = (Button) this.findViewById(R.id.bttSplash1);
-        searchst.setOnClickListener(bttSplash1Click);
-
-        final Button btt2 = (Button) this.findViewById(R.id.bttSplash2);
-        btt2.setOnClickListener(bttSplash2itemlist);
-
-
-
+    private void mainLoginWorkflow(){
         // der "no internet workflow"
         // IMMER ZUM SCHLUSS!!!
         // -------------------------
         if (!isOnline()){
             noInternetWorkflowExecute();
         } else {
-            loginWorkflow();
+            // internet da...
+            checkIfLoggedIn();
         }
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = this;
+
+
+//        Button crPostRecords = (Button) this.findViewById(R.id.bttSplash4);
+//        crPostRecords.setOnClickListener(bttSplash4ClickLogin);
+//        Button btt10 = (Button) this.findViewById(R.id.bttSplash3);
+//        btt10.setOnClickListener(bttSplash3MainActivityClick);
+//        Button searchst = (Button) this.findViewById(R.id.bttSplash1);
+//        searchst.setOnClickListener(bttSplash1Click);
+//        final Button btt2 = (Button) this.findViewById(R.id.bttSplash2);
+//        btt2.setOnClickListener(bttSplash2itemlist);
+
+
+        setContent();
+        mainLoginWorkflow();
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 //        if (!prefs.getBoolean("first_time", false)) {
-//            // FIRST TIME!!
-//            furtherToMainActivity(true);
-//        } else {
-//            // again....
-//            furtherToMainActivity(false);
-//        }
     }
 
 
@@ -228,23 +223,6 @@ public class SplashActivity extends AppCompatActivity{
         BitmapConverterHelper bh = new BitmapConverterHelper();//
         splashImg.setImageBitmap(bh.resizeBitmap(getResources(), R.drawable.gigger_splash_wtitle1, Math.round(dpHeight)));
         splashImg.setVisibility(View.VISIBLE);
-    }
-
-    public void furtherToMainActivity(Boolean withSplash) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            if (withSplash) {
-                setContent();
-                /* New Handler to start the Menu-Activity
-                * and close this Splash-Screen after some seconds.*/
-                handler.sendEmptyMessageDelayed(0, SPLASH_DISPLAY_LENGTH);
-            } else {
-                startMainActivity();
-            }
-
-        } else {
-            showQuestion();
-        }
     }
 
 
@@ -297,9 +275,6 @@ public class SplashActivity extends AppCompatActivity{
         this.startActivity(LoginIntent);
     }
 
-    public void loginGoogle() {
-        // die hilfsfunktionen von der Googlelogin unit nutzen, um sich bei google anzumelden.
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

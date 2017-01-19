@@ -57,7 +57,7 @@ public class LoginImageHelper implements Transformation {
         int height = Math.round(context.getResources().getDimension(R.dimen.BandList_profileColumn));
         Bitmap loadbmp = transform(bh.resizeBitmap(context.getResources(), R.drawable.defprofilepic, height));
         Drawable loadPic = new BitmapDrawable(context.getResources(), loadbmp);
-        Bitmap errbmp = transform(bh.resizeBitmap(context.getResources(), R.drawable.erroricon, height));
+        Bitmap errbmp = transform(bh.resizeBitmap(context.getResources(), R.drawable.ic_error_outline_black_24dp, height));
         Drawable errorPic = new BitmapDrawable(context.getResources(), errbmp);
         Picasso.with(context)
                 .load(urlForPhoto)

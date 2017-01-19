@@ -11,7 +11,6 @@ import net.livingrecordings.giggermainapp.BandEditor.BandEditorActivity;
 import net.livingrecordings.giggermainapp.BandEditor.ImportSingleContactActivity;
 import net.livingrecordings.giggermainapp.BandEditor.ShowContactDetailActivity;
 import net.livingrecordings.giggermainapp.EquipEditor.EquipEditorActivity;
-import net.livingrecordings.giggermainapp.ItemListActivity;
 import net.livingrecordings.giggermainapp.LoginScreens.LoginActivity;
 import net.livingrecordings.giggermainapp.MainActivity;
 import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerContactCollection;
@@ -117,14 +116,6 @@ public class GiggerIntentHelperClass {
 
     public void intentShowItem(String itemIdent) {
         prepareIntentEQEditor(EditorMode_DETAIL,EditorEquipType_ITEM,itemIdent,"");
-    }
-
-
-    public void intentShowItemList(String forTag) {
-            Intent eIntent = new Intent(mContext, ItemListActivity.class);
-            eIntent.putExtra(equipIdent_CATEGORY, forTag);
-            mContext.startActivity(eIntent);
-
     }
 
 

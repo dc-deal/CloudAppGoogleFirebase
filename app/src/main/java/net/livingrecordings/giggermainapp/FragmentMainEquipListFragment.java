@@ -101,7 +101,6 @@ implements FragmentMainEquipListManager.catManagerCallbacks {
 
     @Override
     public void onLastLevelClicked(String actCatKey) {
-        new GiggerIntentHelperClass(getActivity()).intentShowItemList(actCatKey);
     }
 
     public void pushBack(){

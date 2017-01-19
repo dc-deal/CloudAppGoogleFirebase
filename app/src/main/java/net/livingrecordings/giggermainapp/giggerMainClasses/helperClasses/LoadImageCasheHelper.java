@@ -206,7 +206,7 @@ public class LoadImageCasheHelper {
             Picasso.with(cont)
                     .load(mCashedUri)
                     .placeholder(R.drawable.imgplaceholder)// //R.drawable.progress_animation
-                    .error(R.drawable.erroricon)
+                    .error(R.drawable.ic_error_outline_black_24dp)
                     .into(mImgView);
         }
         return mCashedUri;

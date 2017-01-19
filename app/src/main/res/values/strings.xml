@@ -84,6 +84,7 @@
 
     <string name="importcontact_header">Kontakt importieren</string>
     <string name="importcontact_search_hint">Nach Profil suchen</string>
+    <string name="search">Suchen</string>
     <string name="error_savephoto">Fehler beim Verarbeiten des Photos!</string>
 
     <string name="contactdetail_name">Username</string>

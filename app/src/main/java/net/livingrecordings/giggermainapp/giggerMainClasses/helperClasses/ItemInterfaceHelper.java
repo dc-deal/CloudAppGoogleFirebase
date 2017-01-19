@@ -144,7 +144,7 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
         Picasso.with(mContext)
                 .load(inp)
                 .placeholder(R.drawable.imgplaceholder)// //R.drawable.progress_animation
-                .error(R.drawable.erroricon)
+                .error(R.drawable.ic_error_outline_black_24dp)
                 .into((ImageView) mView.findViewById(R.id.viewItemImg));
     }
 

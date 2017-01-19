@@ -25,7 +25,7 @@
     <style name="AppTheme.mytextviewstyle" parent="android:Widget.TextView">
         <item name="android:textColor">#000000</item>
         <item name="android:padding">6dp</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
 

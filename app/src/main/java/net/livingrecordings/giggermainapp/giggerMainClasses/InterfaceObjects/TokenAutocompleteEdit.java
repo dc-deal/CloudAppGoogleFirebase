@@ -3,9 +3,13 @@ package net.livingrecordings.giggermainapp.giggerMainClasses.InterfaceObjects;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
+import android.widget.MultiAutoCompleteTextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,11 +26,62 @@ import java.util.Set;
  * Created by Kraetzig Neu on 11.01.2017.
  */
 
-public class TokenAutocompleteEdit extends ChipLayout {
+// basiet auf MultiAutoCompleteTextView..
+public class TokenAutocompleteEdit extends ChipLayout implements MultiAutoCompleteTextView.Tokenizer {
 
     public ArrayAdapter<String> adapter;
     public Context mContext;
 
+
+//http://stackoverflow.com/questions/3482981/how-to-replace-the-comma-with-a-space-when-i-use-the-multiautocompletetextview
+    public int findTokenStart(CharSequence text, int cursor) {
+        int i = cursor;
+
+        while (i > 0 && text.charAt(i - 1) != ' ') {
+            i--;
+        }
+        while (i < cursor && text.charAt(i) == ' ') {
+            i++;
+        }
+
+        return i;
+    }
+
+    public int findTokenEnd(CharSequence text, int cursor) {
+        int i = cursor;
+        int len = text.length();
+
+        while (i < len) {
+            if (text.charAt(i) == ' ') {
+                return i;
+            } else {
+                i++;
+            }
+        }
+
+        return len;
+    }
+
+    public CharSequence terminateToken(CharSequence text) {
+        int i = text.length();
+
+        while (i > 0 && text.charAt(i - 1) == ' ') {
+            i--;
+        }
+
+        if (i > 0 && text.charAt(i - 1) == ' ') {
+            return text;
+        } else {
+            if (text instanceof Spanned) {
+                SpannableString sp = new SpannableString(text + " ");
+                TextUtils.copySpansFrom((Spanned) text, 0, text.length(),
+                        Object.class, sp, 0);
+                return sp;
+            } else {
+                return text + " ";
+            }
+        }
+    }
 
     private void createMe(Context context){
         mContext = context;
@@ -93,6 +148,7 @@ public class TokenAutocompleteEdit extends ChipLayout {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (s.length() > 1){
+                //s.charAt(s.length()-1)
                 final String search = s.toString().toUpperCase().trim();
                 // neuen adapter setzen
                 char c = '\uf8ff';

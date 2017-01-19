@@ -26,10 +26,12 @@
         android:visibility="gone" />
 
 
+    <!--Teststellungen -.- -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/bttSplash1"

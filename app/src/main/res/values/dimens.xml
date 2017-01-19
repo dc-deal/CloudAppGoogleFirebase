@@ -33,6 +33,8 @@
     <dimen name="CategoryGrid_iconsize">40dp</dimen>
     <dimen name="BandList_profileColumn">55dp</dimen>
 
+    <dimen name="bb_height">56dp</dimen>
+
     <!-- Pgoogle -->
 
 </resources>

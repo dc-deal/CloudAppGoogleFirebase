@@ -34,10 +34,6 @@ public class GiggerContactCollection {
     // ein giggeruser ist ein registrierter "Gigger", die die app mit seinem Handy nutzt
     // oder ein Kontakt, der nach gigger eingeladen wird und schonmal vom telefonbuch integriert wird.
     // man kann
-    int[] bimages = {R.drawable.bandlogo1,
-            R.drawable.bandlogo2,
-            R.drawable.bandlogo3,
-            R.drawable.bandlogo4};
 
     public GiggerContactCollection() {
         // ersmal ein paar dummy kontakte erstellen.
@@ -51,7 +47,7 @@ public class GiggerContactCollection {
         for (int i = 0; i < bnames.length; i++) {
             currBand = new GiggerBand(bnames[i]);
             currBand.contactID = "BAND" + Integer.toString(i);
-            currBand.imgRef = bimages[i];
+       //     currBand.imgRef = bimages[i];
 
             for (int u = 0; u <= perBand; u++) {
                 currUser = new GiggerContact();
@@ -72,7 +68,7 @@ public class GiggerContactCollection {
         loginUser.contactID = "User" + 2324;
         loginUser.contactNumber = "1234123";
         loginUser.userLoginString = "dcdeal001";
-        loginUser.imgRef = R.drawable.fry;
+    //    loginUser.imgRef = R.drawable.fry;
         String pwClean = "A1234!";
         try {
             loginUser.userPasswordHash = toHashStr(pwClean);
