@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.libaml.android.view.chip.ChipLayout;
 
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.GiggerMainAPI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -152,7 +152,7 @@ public class TokenAutocompleteEdit extends ChipLayout implements MultiAutoComple
                 final String search = s.toString().toUpperCase().trim();
                 // neuen adapter setzen
                 char c = '\uf8ff';
-                GiggerItemAPI.getInstance().getTagsPublishedRef().orderByKey()
+                GiggerMainAPI.getInstance().getTagsPublishedRef().orderByKey()
                         .startAt(search).endAt(search+c).limitToFirst(10)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

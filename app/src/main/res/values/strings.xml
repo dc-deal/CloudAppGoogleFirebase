@@ -33,7 +33,7 @@
     <string name="title_EquipEditorActivity_crItem">Gegenstand erstellen</string>
     <string name="title_EquipEditorActivity_crCat">Kategorie erstellen</string>
     <string name="title_EquipEditorActivity_delItem">Gegenstand löschen</string>
-    <string name="title_EquipEditorActivity_eqPublished">Gegenstand Veröffentlichen?</string>
+    <string name="title_EquipEditorActivity_eqPublished">Gegenstand auf Gigger Online veröffentlichen?</string>
 
     <string name="title_EquipEditorActivity_eqDesc">Beschreibung</string>
     <string name="title_EquipEditorActivity_eqDescHint">Beschreiben Sie ihren Gegenstand</string>
@@ -46,7 +46,7 @@
     <string name="title_EquipEditorActivity_showCat">Kategorie: </string>
     <string name="title_EquipEditorActivity_editCat">Kategorie bearbeiten</string>
     <string name="title_EquipEditorActivity_delCat">Kategorie löschen</string>
-    <string name="title_EquipEditorActivity_ShowPublished">Gegenstand ist öffentlich</string>
+    <string name="title_EquipEditorActivity_ShowPublished">Gegenstand ist auf Gigger Online verfügbar (Öffentlich)</string>
 
 
     <string name="title_EquipEditorActivity_eqCaption">Bezeichnung</string>
@@ -66,7 +66,7 @@
     <string name="bandEditor_name">Bandname</string>
     <string name="bandEditor_nameHint">euer Bandname</string>
     <string name="bandEditor_Style">Beschreibung</string>
-    <string name="bandEditor_StyleHint">z.B. was für Musik ihr so spielt</string>
+    <string name="bandEditor_StyleHint">z.B. Rockmusik</string>
     <string name="bandEditor_logo">bandlogo festlegen</string>
     <string name="bandEditor_contacts">Kontakte</string>
     <string name="crBand">Band erstellen</string>
@@ -85,6 +85,8 @@
     <string name="importcontact_header">Kontakt importieren</string>
     <string name="importcontact_search_hint">Nach Profil suchen</string>
     <string name="search">Suchen</string>
+    <string name="gigs">Gigs</string>
+    <string name="members">Mitglieder</string>
     <string name="error_savephoto">Fehler beim Verarbeiten des Photos!</string>
 
     <string name="contactdetail_name">Username</string>
@@ -170,8 +172,9 @@
 
     <string name="edit_cat_altered">Änderungen wurden Übernommen!</string>
     <string name="edit_cat_altered_pic">Änderungen Übernommen und neues Bild hochgeladen...</string>
-
-
+    <string name="no_bands_inList">Keine Bands in der Liste!</string>
+    <string name="band_exists">Diese Band existiert bereits. Bitte wähle einen anderen Namen!</string>
+    <string name="band_name_Error">Du musst mindestens einen Namen für deine Band angeben - und mindestens 3 Zeichen.!</string>
     <!-- basics -->
     <string name="btt_ok">OK</string>
     <string name="btt_abort">Abbrechen</string>
@@ -198,5 +201,12 @@
     <string name="item_already_exists">Der Gegenstand existiert bereits. Wollten Sie wirklich einen gegenstand mit dem selben Namen erstellen?</string>
     <string name="item_name_error">Du musst zumindest einen Namen für deinen Gegenstand eingeben (3 Zeichen Lang).</string>
     <string name="picture_choose_click">Wo möchtest du das Bild für deinen Gegenstand hernehmen?</string>
+
+
+        <string name="band_entry_success">Deine Band wurde erfolgreich angelegt!!\n
+        Solltest du ein Bandlogo gewählt haben, .</string>
+        <string name="user_profile_Save">Dein Profil wirde erfolgrecih geändert.\n
+        Solltest du ein neues Profilbild gewählt haben, wird es im Hintergrund hochgeladen.</string>
+
 
 </resources>

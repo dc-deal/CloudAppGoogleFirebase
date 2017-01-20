@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:style="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,22 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
-            android:gravity="center"
             android:orientation="vertical">
 
-
-            <ImageView
-                android:id="@+id/bandDetail_image"
+            <ImageButton
+                android:id="@+id/profile_image"
                 style="@style/AppTheme.header"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/showitem_margin"
-                android:text="" />
-
-            android:text="" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
-        <LinearLayout
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/edits_margin"
@@ -41,24 +38,13 @@
             android:layout_marginTop="@dimen/showitem_topMargin"
             android:layout_weight="0.1"
             android:orientation="vertical">
-            <!-- holo_orange_light -->
-            <!-- hier das layout für das anzeigen eines items. -->
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/edits_margin">
-                <!--
-                              <ImageView
-                                    android:id="@+id/WidgetIcon"
-                                    android:src="@android:drawable/ic_menu_always_landscape_portrait"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="20dip"
-                                    android:paddingTop="3dip"
-                                    android:layout_weight="2"
-                                    />
-                -->
 
                 <TextView
                     style="@style/AppTheme.mytextviewstyle"
@@ -66,10 +52,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_weight="2"
-                    android:text="@string/banddetail_name" />
+                    android:text="@string/contactdetail_name" />
 
-                <TextView
-                    android:id="@+id/bandEditor_name"
+                <EditText
+                    android:id="@+id/profile_name"
                     style="@style/AppTheme.mytextviewstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,34 +72,11 @@
                     style="@style/AppTheme.mytextviewstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
                     android:layout_weight="2"
-                    android:text="@string/banddetail_style" />
+                    android:text="@string/auth_email" />
 
-                <TextView
-                    android:id="@+id/bandEditor_Style"
-                    style="@style/AppTheme.mytextviewstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/edits_margin">
-
-                <TextView
-                    style="@style/AppTheme.mytextviewstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="2"
-                    android:text="@string/members" />
-
-                <ListView
-                    android:id="@+id/bandmembers"
+                <EditText
+                    android:id="@+id/profile_email"
                     style="@style/AppTheme.mytextviewstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -122,26 +85,6 @@
 
 
         </LinearLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/viewA"
-        app:layout_anchorGravity="bottom|left|end">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_editband"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@android:drawable/ic_menu_share"
-            app:backgroundTint="#d20b0d"
-            app:fabSize="mini"
-            app:pressedTranslationZ="12dp"
-            android:visibility="gone"/>
     </LinearLayout>
 
 

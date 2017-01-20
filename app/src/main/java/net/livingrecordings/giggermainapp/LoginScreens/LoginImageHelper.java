@@ -40,6 +40,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import net.livingrecordings.giggermainapp.R;
+import net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.GiggerMainAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.BitmapConverterHelper;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
 
@@ -136,7 +137,7 @@ public class LoginImageHelper implements Transformation {
                             if (!user.isAnonymous()) {
                                 // Profil per EMAIL ÖFFNEN!!!
                                 GiggerIntentHelperClass ih = new GiggerIntentHelperClass(context1);
-                                ih.intentShowFBContasct(FirebaseAuth.getInstance().getCurrentUser());
+                                ih.intentShowProfile(GiggerMainAPI.getInstance().getCurrentUserUID());
                             } else {
                                 // nicht zulässig!
                                 Toast.makeText(context1,context1.getString(R.string.auth_failed_anonymous_clickprofile),Toast.LENGTH_LONG);

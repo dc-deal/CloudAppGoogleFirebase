@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import net.livingrecordings.giggermainapp.R;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerContactCollection;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
+import net.livingrecordings.giggermainapp.giggerMainClasses.interfaceHelperClasses.BandInterfaceHelper;
 
 import static net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass.bandIdent_Band;
 
@@ -23,9 +23,8 @@ import static net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses
 public class BandShowFragment extends Fragment {
 
     public View rootView;
-    GiggerContactCollection gv;
-    GiggerContactCollection.GiggerBand gBand;
     GiggerIntentHelperClass ghc;
+    BandInterfaceHelper bih;
     public BandShowFragment() {
 
     }
@@ -35,32 +34,12 @@ public class BandShowFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_bandeditor_showband, container, false);
         Intent eIntent = getActivity().getIntent();
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_showband);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // jetzt will ich das viel aufklappt..
-                if (gBand != null) {
-                    ghc.intentEditBand(gBand);
-                }
-            }
-        });
-
-        GiggerIntentHelperClass ghc = new GiggerIntentHelperClass(getActivity());
         if (eIntent != null && eIntent.hasExtra(bandIdent_Band)) {
             String bandIdent = eIntent.getStringExtra(bandIdent_Band);// z.b. Verstärker a
-            // band aus datenbank holen
-            gv = new GiggerContactCollection();
-            gBand = gv.bands.getBandById(bandIdent);
-            // felder beschriften
-            EditText bname = (EditText) getActivity().findViewById(R.id.bandEditor_name);
-            bname.setText(gBand.contactName);
-            EditText bstyle = (EditText) getActivity().findViewById(R.id.bandEditor_Style);
-            bstyle.setText(gBand.description);
-            ImageView bImage = (ImageView) getActivity().findViewById(R.id.bandEditor_logo);
-            bImage.setImageBitmap(gBand.getimageBig(getActivity()));
+            bih = BandInterfaceHelper.getInstance();
+            bih.setupBandInterface(getActivity(),rootView,bandIdent);
 
-            // darstellen.
+
         }
         return rootView;
     }

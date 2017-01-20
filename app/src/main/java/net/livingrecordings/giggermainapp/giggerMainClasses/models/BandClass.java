@@ -11,9 +11,10 @@ import java.util.Map;
  */
 @SuppressWarnings("serial") //With this annotation we are going to hide compiler warnings
 @IgnoreExtraProperties
-public class BandClass implements Serializable {
+public class BandClass extends GiggerRootClass
+        implements Serializable {
 
-    private String bandName,logo,founder,color,location,website;
+    private String logo,founder,color,location,website,style,imgUrl;
     private Map<String,Boolean> users = new HashMap<>();
     private Map<String,Boolean> gigSchablonen = new HashMap<>();
     // Später auch die gigs und der klendar.
@@ -23,23 +24,16 @@ public class BandClass implements Serializable {
 
     }
 
-    public BandClass(String bandName, String logo, String founder, String color, String location, String website,Map<String,Boolean> users,Map<String,Boolean> gigSchablonen) {
-        this.bandName = bandName;
+    public BandClass(String logo, String founder, String color, String location, String website, String style, String imgUrl, Map<String, Boolean> users, Map<String, Boolean> gigSchablonen) {
         this.logo = logo;
         this.founder = founder;
         this.color = color;
         this.location = location;
         this.website = website;
+        this.style = style;
+        this.imgUrl = imgUrl;
         this.users = users;
         this.gigSchablonen = gigSchablonen;
-    }
-
-    public String getBandName() {
-        return bandName;
-    }
-
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
     }
 
     public String getLogo() {
@@ -96,5 +90,21 @@ public class BandClass implements Serializable {
 
     public void setGigSchablonen(Map<String, Boolean> gigSchablonen) {
         this.gigSchablonen = gigSchablonen;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

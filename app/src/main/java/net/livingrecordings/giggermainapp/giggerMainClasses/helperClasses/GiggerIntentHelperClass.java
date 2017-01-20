@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.util.Log;
 
 
-import com.google.firebase.auth.FirebaseUser;
-
 import net.livingrecordings.giggermainapp.BandEditor.BandEditorActivity;
-import net.livingrecordings.giggermainapp.BandEditor.ImportSingleContactActivity;
+import net.livingrecordings.giggermainapp.BandEditor.EditMyProfile;
 import net.livingrecordings.giggermainapp.BandEditor.ShowContactDetailActivity;
 import net.livingrecordings.giggermainapp.EquipEditor.EquipEditorActivity;
 import net.livingrecordings.giggermainapp.LoginScreens.LoginActivity;
 import net.livingrecordings.giggermainapp.MainActivity;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerContactCollection;
+import net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.GiggerMainAPI;
 
 
 /**
@@ -131,21 +129,33 @@ public class GiggerIntentHelperClass {
             mContext.startActivity(eIntent);
     }
 
-    public void intentShowContact(GiggerContactCollection.GiggerContact gc) {
+    public void intentShowContact(String uid) {
         Intent eIntent = new Intent(mContext, ShowContactDetailActivity.class);
-        eIntent.putExtra(contactIdent_CONTACT, gc.contactID);
+        eIntent.putExtra(contactIdent_CONTACT, uid);
         mContext.startActivity(eIntent);
     }
 
-    public void intentShowFBContasct(FirebaseUser fbUser) {
+    public void intentShowProfile(String uid) {
         Intent eIntent = new Intent(mContext, ShowContactDetailActivity.class);
-        eIntent.putExtra(contactIdent_CONTACT, fbUser.getUid());
+        eIntent.putExtra(contactIdent_CONTACT, uid);
         mContext.startActivity(eIntent);
     }
 
-    public void intentEditBand(GiggerContactCollection.GiggerBand gb) {
-        prepareIntentBandEditor(EditorMode_EDIT,BandEditorType_BAND,gb.contactID);
+    public void intentEditProfile() {
+        GiggerMainAPI api = GiggerMainAPI.getInstance();
+        if (!api.isAnonymous()) {
+            Intent eIntent = new Intent(mContext, EditMyProfile.class);
+            eIntent.putExtra(contactIdent_CONTACT, api.getCurrentUserUID());
+            mContext.startActivity(eIntent);
+        }
     }
+
+    public void intentEditBand(String gb) {
+        prepareIntentBandEditor(EditorMode_EDIT,BandEditorType_BAND,gb);
+    }
+
+
+
     public void intentShowBand(String bandIdent) {
         prepareIntentBandEditor(EditorMode_DETAIL,BandEditorType_BAND,bandIdent);
     }
@@ -154,10 +164,6 @@ public class GiggerIntentHelperClass {
         prepareIntentBandEditor(EditorMode_EDIT,BandEditorType_BAND,"");
     }
 
-    public void intentCreateContact(){
-        Intent eIntent = new Intent(mContext, ImportSingleContactActivity.class);
-        mContext.startActivity(eIntent);
-    }
 
 
     public void intentShowLogin(){

@@ -13,17 +13,20 @@ import java.io.Serializable;
 public class ImagesClass implements Serializable {
 
     private boolean gallery;
-    private String imgUri;
+    private String imgUri,itemReference,bandsReference,userReference;
     private int order;
 
     public ImagesClass(){
 
     }
 
-    public ImagesClass(boolean gallery, String imgUri, int order) {
+    public ImagesClass(boolean gallery, String imgUri, int order, String itemReference, String bandsReference, String userReference) {
         this.gallery = gallery;
         this.imgUri = imgUri;
         this.order = order;
+        this.itemReference = itemReference;
+        this.bandsReference = bandsReference;
+        this.userReference = userReference;
     }
 
 
@@ -50,5 +53,29 @@ public class ImagesClass implements Serializable {
 
     public void setGallery(boolean gallery) {
         this.gallery = gallery;
+    }
+
+    public String getItemReference() {
+        return itemReference;
+    }
+
+    public void setItemReference(String itemReference) {
+        this.itemReference = itemReference;
+    }
+
+    public String getBandsReference() {
+        return bandsReference;
+    }
+
+    public void setBandsReference(String bandsReference) {
+        this.bandsReference = bandsReference;
+    }
+
+    public String getUserReference() {
+        return userReference;
+    }
+
+    public void setUserReference(String userReference) {
+        this.userReference = userReference;
     }
 }

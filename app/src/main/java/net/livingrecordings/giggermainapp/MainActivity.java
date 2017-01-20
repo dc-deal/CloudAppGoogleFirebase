@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,16 +15,9 @@ import android.support.v7.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewConfiguration;
 
-import com.google.firebase.database.Transaction;
-
-import net.livingrecordings.giggermainapp.EquipEditor.EquipShowItemFragment;
 import net.livingrecordings.giggermainapp.LoginScreens.LoginActivity;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerContactCollection;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
-
-import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -34,7 +25,6 @@ public class MainActivity extends AppCompatActivity
     public static final String PAGER_STATE = "PGSTATE";
 //    NavigationView viewNav;
     GiggerIntentHelperClass ghc;
-    GiggerContactCollection gc;
 
     public void showLoginDialog() {
         Intent LoginIntent = new Intent(this,LoginActivity.class);
@@ -53,6 +43,14 @@ public class MainActivity extends AppCompatActivity
         t.commit();
     }
 
+    private void showBands() {
+        t = ft.beginTransaction();
+        t.replace(R.id.placeholder_MAINACTIVITYfragment, new BandListFragment());
+        t.commit();
+    }
+
+
+
     private FragmentManager ft;
     private FragmentTransaction t;
     @Override
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         ghc = new GiggerIntentHelperClass(this);
-        gc = new GiggerContactCollection();
 
         String eqString = getResources().getString(R.string.Equipment);
         String conString = getResources().getString(R.string.BandsAndContacts);
@@ -84,13 +81,15 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
+                            case R.id.gigs:
+                                break;
                             case R.id.equipment:
                                 showItemLIstFragement();
                                 break;
                             case R.id.contacts:
+                                showBands();
                                 break;
-                            case R.id.search:
-                                break;
+
                         }
                         return false;
                     }

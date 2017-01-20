@@ -5,11 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionMenu;
 
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerContactCollection;
+import net.livingrecordings.giggermainapp.BandEditor.BandList;
+
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
 
 /**
@@ -17,17 +20,32 @@ import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.Gigger
  */
 
 
-public class FragmentMainContactList extends Fragment {
+public class BandListFragment extends Fragment implements BandList.BandListCallbacks {
 
     FloatingActionMenu fabMenu;
-    FragmentMainContactListAdapter adapterViewAndroid;
-    GiggerContactCollection gcc;
+
     GiggerIntentHelperClass ghc;
+    BandList bl;
+    TextView noBands;
+    ProgressBar progBar;
+
+    public void onEmptyDatabase(){
+       // hier werrde ich anzeigen wenn noch keine bands gemacht wurden...
+       noBands.setVisibility(View.VISIBLE);
+    }
+
+    public void onReadyLoading(){
+        // hier werrde ich anzeigen wenn noch keine bands gemacht wurden...
+        progBar.setVisibility(View.GONE);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_maincontactlist, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mainbandlist, container, false);
+        noBands = (TextView) rootView.findViewById(R.id.no_bands_inList);
+        progBar = (ProgressBar) rootView.findViewById(R.id.bands_progressbar);
+
         //--------------------------------------------
         // Listener für den Add button unten im Bild..
         fabMenu = (FloatingActionMenu) rootView.findViewById(R.id.create_new_BandOrContact);
@@ -45,19 +63,17 @@ public class FragmentMainContactList extends Fragment {
         crContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ghc.intentCreateContact();
                 fabMenu.close(true);
             }
         });
         ghc = new GiggerIntentHelperClass(getActivity());
-        gcc = new GiggerContactCollection();
-        GiggerContactCollection.GiggerBandList bl = gcc.bands;
-        // hier muss ich die Liste fertig machen.
-        ExpandableListView bandList = (ExpandableListView)rootView.findViewById(R.id.maincontactslist_fragment);
 
 
-        adapterViewAndroid = new FragmentMainContactListAdapter(getActivity(),gcc.bands);
-        bandList.setAdapter(adapterViewAndroid);
+        ListView list = (ListView) rootView.findViewById(R.id.maincontactslist_fragment);
+        bl = new BandList();
+        progBar.setVisibility(View.VISIBLE);
+        bl.startBandList(getActivity(),list,true);
+        bl.setBandListCallbacks(this);
         //gcc.bands <- hiermit kannn ic nun alles darstellen
 
 

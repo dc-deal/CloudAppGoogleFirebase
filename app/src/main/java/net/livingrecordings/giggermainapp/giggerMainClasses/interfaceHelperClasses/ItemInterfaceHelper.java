@@ -1,4 +1,4 @@
-package net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses;
+package net.livingrecordings.giggermainapp.giggerMainClasses.interfaceHelperClasses;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,7 +9,6 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,12 +19,11 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.OnPausedListener;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.InterfaceObjects.TokenAutocompleteEdit;
+import net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.SaveAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.LoadImageCasheHelper;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ImagesClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClassLocal;
@@ -38,8 +36,9 @@ import java.util.ArrayList;
  * Created by Franky on 11.12.2016.
  */
 
-public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheHelperCallbacks {
-    public InterfaceHelperCallbacks callbacks;
+public class ItemInterfaceHelper  extends InterfaceHelperRootClass
+        implements LoadImageCasheHelper.loadImageCasheHelperCallbacks {
+
     TextView inputName;
     TextView inputDesc;
     TokenAutocompleteEdit inputTags;
@@ -48,13 +47,13 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
     TextView inputPublishedTextView;
     String nameStr;
     String descStr;
-    String LOG_TAG = "INTHELP";
+    String LOG_TAG = "ITEMILOG";
     String thisItemKey;
     ItemClass itemClassModel;
     boolean isNUEntry;
     Activity mContext;
     View mView;
-    GiggerItemAPI mainAPI;
+    SaveAPI saveAPI;
     LoadImageCasheHelper mImgCasheHelper;
     Uri actUriInImageButton;
 
@@ -62,33 +61,32 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
         actUriInImageButton = Uri.parse(imgList.get(0).getImgUri()); // liste hat immer etwas.
     }
 
-    public ItemClass getCurrentItem(){
-        return itemClassModel;
+    public void ItemInterfaceHelper(){
+
     }
 
-    public ItemInterfaceHelper(final Activity context, final View view, final String itemKey) {
+    public void setupItemInterfaceHelper(final Activity context, final View view, final String itemKey) {
         try {
-            callbacks = (InterfaceHelperCallbacks) context;
+            setItemInterfaceHelperCallbacks((InterfaceHelperCallbacks) context);
         } catch (Exception e) {
-            Log.e("INTHELP", "Interface InterfaceHelperCallbacks is not bound. This may cause trouble... eg. Save routine");
+            Log.e(LOG_TAG, "Interface InterfaceHelperCallbacks is not bound. This may cause trouble... eg. Save routine");
         }
         thisItemKey = itemKey.trim();
         isNUEntry = thisItemKey.isEmpty();
-        itemClassModel = new ItemClass();
-        mainAPI = GiggerItemAPI.getInstance();
+        saveAPI = SaveAPI.getInstance();
         mImgCasheHelper = LoadImageCasheHelper.getInstance();
-        mImgCasheHelper.callbacks = this;
+        mImgCasheHelper.loadImageCallbacks = this;
         // methode nimmt die view und füllt
         mContext = context;
+        itemClassModel = new ItemClass();
         mView = view;
         if (!isNUEntry) {
             // kann nur referenzieren wenn es kein neueintrag ist
-            mainAPI.getPrivateItemRef(thisItemKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            saveAPI.getPrivateItemRef(thisItemKey).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     itemClassModel = dataSnapshot.getValue(ItemClass.class);
                     if (itemClassModel != null) {
-                        itemClassModel.setDbKey(itemKey);
                         inputName.setText(itemClassModel.getName());
                         inputDesc.setText(itemClassModel.getDesc());
                         inputTags.setInputSet(itemClassModel.getTags().keySet());
@@ -125,7 +123,7 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
 
     public String getKey() {
         if (isNUEntry) {
-            Log.e("INTHELP", "Itemkey demanded with newItem.. this wo't work!!");
+            Log.e(LOG_TAG, "Itemkey demanded with newItem.. this wo't work!!");
         }
         return thisItemKey;
     }
@@ -159,8 +157,8 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
        // hierm uss ich meine eigene Komponente machen, die für die scroll view sorgt.
        // TODO sie wird dann mehrere bilder anzeigen könenen.
 
-       for (String s : itemClassModel.getImgs().values()) {
-            if (s != itemClassModel.getGalleryPic()) {
+       for (String s : bandClassModel.getImgs().values()) {
+            if (s != bandClassModel.getGalleryPic()) {
                 // natürlich nciht das galleriebild laden...
                 ImageView imageView = new ImageView(mContext);
                 imageView.setPadding(2, 2, 2, 2);
@@ -189,7 +187,7 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
         if ((!nameStr.equals("") && (nameStr.length() > 2))) {
             // prüfung ob der Gegenstand schon da ist,.
             if (isNUEntry) {
-                mainAPI.getDublicateNameSearchQuery(nameStr.toUpperCase()).addListenerForSingleValueEvent(new ValueEventListener() {
+                saveAPI.getDublicateNameSearchQuery(nameStr.toUpperCase()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() == null) {
@@ -234,15 +232,13 @@ public class ItemInterfaceHelper implements LoadImageCasheHelper.loadImageCasheH
         itemClassModel.setDesc(descStr);
         itemClassModel.setTags(inputTags.getAsHashMap());
         itemClassModel.setPublished(inputPublishedCB.isChecked());
-        itemClassModel.addUploadImage(new ImagesClass(true,actUriInImageButton.toString(),1));
-
-        mainAPI.saveItem(mContext, this.itemClassModel, new ItemClassLocal());
-        if (callbacks != null) {
-            callbacks.onSaveProgressComplete();
+        itemClassModel.addUploadImage(new ImagesClass(true,actUriInImageButton.toString(), 1, "", "", ""));
+        // noch ist dfie local klasse ein dummy...
+        saveAPI.saveItem(mContext, this.itemClassModel, new ItemClassLocal(), thisItemKey);
+        if (getItemInterfaceHelperCallbacks() != null) {
+            getItemInterfaceHelperCallbacks().onSaveProgressComplete();
         }
     }
 
-    public interface InterfaceHelperCallbacks {
-        void onSaveProgressComplete();
-    }
+
 }

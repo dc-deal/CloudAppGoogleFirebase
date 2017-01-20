@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/contactdetail_bands" />
 
-                <ExpandableListView
+                <ListView
                     android:id="@+id/contdetail_bandlist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

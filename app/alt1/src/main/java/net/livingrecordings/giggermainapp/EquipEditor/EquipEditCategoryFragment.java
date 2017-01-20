@@ -105,7 +105,7 @@ implements CategoryDlg.categoryDLGEvents {
         // imgUri
         if ((!catNameStr.equals("") && (!catDescStr.equals("") && (imgChosen)))) {
             // gigger service aufrufen...
-          //  new GiggerItemAPI().
+          //  new GiggerMainAPI().
         }
     }
 

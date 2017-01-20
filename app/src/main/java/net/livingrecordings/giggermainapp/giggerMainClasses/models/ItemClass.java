@@ -1,14 +1,10 @@
 package net.livingrecordings.giggermainapp.giggerMainClasses.models;
 
-import android.net.Uri;
-
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,30 +12,19 @@ import java.util.Map;
  */
 @SuppressWarnings("serial") //With this annotation we are going to hide compiler warnings
 @IgnoreExtraProperties
-public class ItemClass implements Serializable {
+public class ItemClass extends GiggerRootClass
+        implements Serializable {
 
-    private String name, searchName, desc, createdBy;
+    private String searchName, desc, createdBy;
     private HashMap<String,Boolean> tags = new HashMap();
     private boolean isPublished = false;
-   // dann wird sie so abgespreichertn. vorteil: bilder die shcon da sind werden nicht neu hochgeladen.
 
-    // extras...
-    @Exclude
-    private String key;
-    @Exclude
-    private ArrayList<ImagesClass> uploadImages = new ArrayList<>();
-    @Exclude
-    private ArrayList<ImagesClass> deleteList = new ArrayList<>();
 
     public ItemClass() {
-        // STD .must have for FB
     }
 
-    // LIGHTWEIGHT FIREBASE CONSTRUCTOR...
-    // NO FUNCTIONALITY HERE!!!
-    public ItemClass(String name, String searchName, String desc,
+    public ItemClass(String searchName, String desc,
                      HashMap<String, Boolean> tags, String createdBy, boolean isPublished) {
-        this.name = name;
         this.searchName = searchName;
         this.desc = desc;
         this.createdBy = createdBy;
@@ -47,13 +32,7 @@ public class ItemClass implements Serializable {
     }
 
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDesc() {
         return desc;
@@ -105,47 +84,6 @@ public class ItemClass implements Serializable {
             tags.put(array[i],true);
         }
         return tags;
-    }
-    @Exclude
-    public String getDbKey(){
-        return this.key;
-    }
-    @Exclude
-    public void setDbKey(String key){
-        this.key= key;
-    }
-
-    @Exclude
-    public Boolean addUploadImage(ImagesClass upImg){
-        Boolean added = false;
-        Boolean equalFound = false;
-        for (ImagesClass img : uploadImages){
-            if (img.getImgUri().equals(upImg.getImgUri())){
-                equalFound = true;
-            }
-        }
-        if (!equalFound){
-            uploadImages.add(upImg);
-            return true;
-        }
-        return added;
-    }
-    @Exclude
-    public void addDeletePic(Uri upImg){
-        deleteList.add(new ImagesClass(false,upImg.toString(),0)); // das image Objekt ist hier wohl eher ein dummy.
-    }
-
-    @Exclude
-    public void addDeletitionPicture(Uri inpUrl) {
-        this.deleteList.add(new ImagesClass(false,inpUrl.toString(),0));
-    }
-    @Exclude
-    public ArrayList<ImagesClass> getUploadImages(){
-        return uploadImages;
-    }
-    @Exclude
-    public ArrayList<ImagesClass> getDeletitionImages(){
-        return deleteList;
     }
 
     public String getSearchName() {

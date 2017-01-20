@@ -152,7 +152,7 @@ public class GiggerMainAPI {
         JobManager mJobManager;
 
         public SaveItemService() {
-            super("GiggerItemAPI");
+            super("GiggerMainAPI");
         }
 
         @Override

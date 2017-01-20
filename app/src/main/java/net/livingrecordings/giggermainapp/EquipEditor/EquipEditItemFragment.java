@@ -21,7 +21,9 @@ import android.widget.ImageButton;
 
 
 import net.livingrecordings.giggermainapp.R;
-import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.ItemInterfaceHelper;
+import net.livingrecordings.giggermainapp.giggerMainClasses.interfaceHelperClasses.InterfaceHelperCallbacks;
+import net.livingrecordings.giggermainapp.giggerMainClasses.interfaceHelperClasses.InterfaceHelperRootClass;
+import net.livingrecordings.giggermainapp.giggerMainClasses.interfaceHelperClasses.ItemInterfaceHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +37,8 @@ import static net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses
  * Created by Kraetzig Neu on 04.11.2016.
  */
 
-public class EquipEditItemFragment extends Fragment implements ItemInterfaceHelper.InterfaceHelperCallbacks {
+public class EquipEditItemFragment extends Fragment
+        implements InterfaceHelperCallbacks {
 
     public EquipEditItemFragment() {
     }
@@ -179,8 +182,9 @@ public class EquipEditItemFragment extends Fragment implements ItemInterfaceHelp
                 newEntryBtt.setOnClickListener(onCrClick);
             }
             // klasse intialisiert die view mit dem Weten aus dem schlüssel des Gegenstandes.
-            thisItem = new ItemInterfaceHelper(getActivity(), rootView, itemIdent);
-            thisItem.callbacks = this;
+            thisItem = new ItemInterfaceHelper();
+            thisItem.setupItemInterfaceHelper(getActivity(), rootView, itemIdent);
+            thisItem.setItemInterfaceHelperCallbacks(this);
             // spinner einstellen
             // kategorie des aktuellen items wird gesucht
             if (isNewEntry) {

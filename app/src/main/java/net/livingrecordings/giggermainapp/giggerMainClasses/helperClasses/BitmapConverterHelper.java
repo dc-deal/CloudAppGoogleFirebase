@@ -11,7 +11,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI.MAX_GLOBALFILE_SIZE;
+import static net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.GiggerMainAPI.MAX_GLOBALFILE_SIZE;
 
 /**
  * Created by Kraetzig Neu on 15.11.2016.

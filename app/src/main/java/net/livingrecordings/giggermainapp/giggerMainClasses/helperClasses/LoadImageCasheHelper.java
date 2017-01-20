@@ -20,7 +20,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import net.livingrecordings.giggermainapp.R;
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.GiggerMainAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ImagesClass;
 
 import java.io.File;
@@ -37,8 +37,7 @@ public class LoadImageCasheHelper {
     private final static String CASHEUNIT_CONST = "CASHEUNIT_CONST";
     public Uri mOnlineUri;
     public Uri mCashedUri;
-    private ImageView mImgView;
-    loadImageCasheHelperCallbacks callbacks;
+    public loadImageCasheHelperCallbacks loadImageCallbacks;
 
     public interface loadImageCasheHelperCallbacks{
         void provideAllImages_asOnlineUri(ArrayList<ImagesClass> imgList);
@@ -53,20 +52,19 @@ public class LoadImageCasheHelper {
     }
 
     public void loadGalleryImage_Cashed(final Context mContext, final ImageView imgView, final String itemKey) {
-        this.mImgView = imgView;
-        GiggerItemAPI.getInstance().getGalleryImageQuery(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
+        GiggerMainAPI.getInstance().getItemImageQuery(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     ImagesClass thisImage = ds.getValue(ImagesClass.class);
-                    if (thisImage != null) {
+                    if ((thisImage != null)&&thisImage.isGallery()) {
                         mOnlineUri = Uri.parse(thisImage.getImgUri()); // noch online link
                         // offlinne link ermitteln.
-                        writeImageToLocalCashe(mContext, itemKey, Uri.parse(thisImage.getImgUri()));
+                        getImageAndCashe(mContext, Uri.parse(thisImage.getImgUri()),imgView);
                         ArrayList<ImagesClass> imgList = new ArrayList<>();
                         imgList.add(thisImage);
-                        if (callbacks != null) {
-                            callbacks.provideAllImages_asOnlineUri(imgList);
+                        if (loadImageCallbacks != null) {
+                            loadImageCallbacks.provideAllImages_asOnlineUri(imgList);
                         }
                     }
                 }
@@ -115,7 +113,7 @@ public class LoadImageCasheHelper {
 
 
     // schreibt bilder in einen lokalen cashe, der imemr wieder ausgelesen wird, sobald das Bild heruntergeladen ist.
-    public void writeImageToLocalCashe(final Context mContext, final String ItemKey, final Uri fileUri) {
+    public void getImageAndCashe(final Context mContext, final Uri fileUri, final ImageView imgView) {
         // check if file exists...
         mCashedUri = null;
         if (URLUtil.isValidUrl(fileUri.toString())) {
@@ -123,7 +121,7 @@ public class LoadImageCasheHelper {
             // download file if it doesn't exist in cashe...
             StorageReference storRef = FirebaseStorage.getInstance().getReferenceFromUrl(fileUri.toString());
             if (storRef == null) {
-                Log.e(CASHEUNIT_CONST, "couldnt find storage reference in writeImageToLocalCashe");
+                Log.e(CASHEUNIT_CONST, "couldnt find storage reference in getImageAndCashe");
             } else {
                 // ref existes...
                 final String filename = storRef.getName(); // get file name...
@@ -131,7 +129,7 @@ public class LoadImageCasheHelper {
                 File locaFile = getLocalPath(filename);
            /*     File locaCashedFile = getLocalCasheDir(filename);*/ // noch nicht aktiv.
                 if ((locaFile.exists())/*||(locaCashedFile.exists())*/) {
-                    setAndShowImage(mContext,locaFile);
+                    setAndShowImage(mContext,locaFile,imgView);
                 } else {
                     final long ONE_MEGABYTE = 1024 * 1024;
                     storRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -146,7 +144,7 @@ public class LoadImageCasheHelper {
                                 FileOutputStream fos = new FileOutputStream(outputFile);
                                 bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
                                 fos.close(); // http://stackoverflow.com/questions/15662258/how-to-save-a-bitmap-on-internal-storage
-                                setAndShowImage(mContext,outputFile);
+                                setAndShowImage(mContext,outputFile,imgView);
                                 //  TODO Note: It might be wise to use Environment.getExternalStorageDirectory()
                                 //  TODO for getting the "SD Card" directory as this might change if a phone
                                 //  TODO comes along which has something other than an SD Card (such as built-in flash, a'la the iPhone). Either way you should keep in mind that you need to check to make sure it's actually there as the SD Card may be removed.
@@ -161,7 +159,7 @@ public class LoadImageCasheHelper {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
                             // FILE NOT FOUND!!!
-                            Log.e(CASHEUNIT_CONST, "couldnt store / download file in writeImageToLocalCashe");
+                            Log.e(CASHEUNIT_CONST, "couldnt store / download file in getImageAndCashe");
                             // TODO .. DELETE LOCAL CASHE:.?
                         }
                     });
@@ -200,14 +198,14 @@ public class LoadImageCasheHelper {
         return false;
     }
 
-    private Uri setAndShowImage(Context cont, File inp) {
+    private Uri setAndShowImage(Context cont, File inp, ImageView imgView) {
         mCashedUri = Uri.fromFile(inp);
-        if ((mImgView != null)){
+        if ((imgView != null)){
             Picasso.with(cont)
                     .load(mCashedUri)
                     .placeholder(R.drawable.imgplaceholder)// //R.drawable.progress_animation
                     .error(R.drawable.ic_error_outline_black_24dp)
-                    .into(mImgView);
+                    .into(imgView);
         }
         return mCashedUri;
     }

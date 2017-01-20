@@ -1,4 +1,4 @@
-package net.livingrecordings.giggermainapp.giggerMainClasses;
+package net.livingrecordings.giggermainapp.giggerMainClasses.models;
 
 import android.net.Uri;
 
@@ -14,14 +14,15 @@ public class UploadImgTaskData {
     private Uri fileToUpload;
     private ImagesClass ImageC;
     private String nameOfItem;
-    private String dbKey;
+    private String dbKey,savePath;
 
 
-    public UploadImgTaskData(String Name,String dbKey, Uri fileToUpload, ImagesClass imageC) {
+    public UploadImgTaskData(String Name,String dbKey,String savePath, Uri fileToUpload, ImagesClass imageC) {
         this.dbKey = dbKey;
         this.nameOfItem = Name;
         this.fileToUpload = fileToUpload;
-        this.ImageC = imageC;
+        this.savePath = savePath; // z.b. BANDS  oder IMAGES_LOCAL
+        this.ImageC = imageC; // ist es ein galleriebeild, ev .auch reihenfolgen...
     }
 
 
@@ -56,5 +57,13 @@ public class UploadImgTaskData {
 
     public void setDbKey(String dbKey) {
         this.dbKey = dbKey;
+    }
+
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath;
     }
 }

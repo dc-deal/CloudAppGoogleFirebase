@@ -11,28 +11,21 @@ import java.util.Map;
  */
 @SuppressWarnings("serial") //With this annotation we are going to hide compiler warnings
 @IgnoreExtraProperties
-public class UserClass implements Serializable{
+public class UserClass  extends GiggerRootClass
+        implements Serializable{
 
-    private String userName,email,mobileNr;
+    private String email,mobileNr,imgUrl;
     private Map<String,Boolean> bands = new HashMap<>();
 
     public UserClass(){
 
     }
 
-    public UserClass(String userName, String email, String mobileNr,Map<String,Boolean> bands){
-        this.userName = userName;
+    public UserClass(String email, String mobileNr, String imgUrl, Map<String, Boolean> bands){
         this.email = email;
         this.mobileNr = mobileNr;
+        this.imgUrl = imgUrl;
         this.bands = bands;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getEmail() {
@@ -57,5 +50,13 @@ public class UserClass implements Serializable{
 
     public void setBands(Map<String, Boolean> bands) {
         this.bands = bands;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

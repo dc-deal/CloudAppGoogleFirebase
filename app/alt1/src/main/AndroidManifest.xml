@@ -33,7 +33,7 @@
         <activity android:name=".ItemListActivity"/>
         <activity android:name=".EquipEditor.EquipEditorActivity"/>
         <activity android:name=".BandEditor.BandEditorActivity"/>
-        <activity android:name=".BandEditor.ImportSingleContactActivity"/>
+        <activity android:name=".BandEditor.notUsedNow.ImportSingleContactActivity"/>
         <activity android:name=".BandEditor.ShowContactDetailActivity"/>
         <activity android:name=".SettingsActivity"/>
         <activity android:name=".LoginScreens.LoginActivity"/>
@@ -51,7 +51,7 @@
 
 
         <service
-            android:name=".giggerMainClasses.GiggerItemAPI"
+            android:name=".giggerMainClasses.MainAPI.GiggerMainAPI"
             android:exported="false"/>
 
     </application>

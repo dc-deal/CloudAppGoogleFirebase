@@ -135,10 +135,10 @@ public class SplashActivity extends AppCompatActivity{
     public void checkIfLoggedIn(){
         // "default loginworkflow"
         //-------------------------------
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
                 Boolean uThere = FirebaseAuth.getInstance().getCurrentUser() != null;
                 if (uThere) {
                     // ALL OK!

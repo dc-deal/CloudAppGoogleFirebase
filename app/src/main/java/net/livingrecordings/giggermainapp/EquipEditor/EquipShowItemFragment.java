@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import net.livingrecordings.giggermainapp.R;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.LoadImageCasheHelper;
-import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.ItemInterfaceHelper;
+import net.livingrecordings.giggermainapp.giggerMainClasses.interfaceHelperClasses.ItemInterfaceHelper;
 
 import static android.content.Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP;
 import static net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass.equipIdent_ITEM;
@@ -75,7 +75,8 @@ public class EquipShowItemFragment extends Fragment {
         Intent eIntent = getActivity().getIntent();
         if ((eIntent != null) && eIntent.hasExtra(equipIdent_ITEM) && (!eIntent.getStringExtra(equipIdent_ITEM).isEmpty()) ) {
             itemIdent = eIntent.getStringExtra(equipIdent_ITEM);// z.b. Verstärker a
-            thisItem = new ItemInterfaceHelper(getActivity(), rootView, itemIdent);
+            thisItem = new ItemInterfaceHelper();
+            thisItem.setupItemInterfaceHelper(getActivity(), rootView, itemIdent);;
 
         } else {
             getActivity().finishActivity(FLAG_ACTIVITY_PREVIOUS_IS_TOP);

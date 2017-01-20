@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import net.livingrecordings.giggermainapp.giggerMainClasses.GiggerItemAPI;
+import net.livingrecordings.giggermainapp.giggerMainClasses.MainAPI.GiggerMainAPI;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.GiggerIntentHelperClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.models.ItemClass;
 import net.livingrecordings.giggermainapp.giggerMainClasses.helperClasses.LoadImageCasheHelper;
@@ -42,7 +42,7 @@ public class ItemListFragment extends Fragment {
     ProgressBar progBarItemLoading;
 
 
-    private void FillItemList_ItemView(ItemClass item, View view) {
+    private void FillItemList_ItemView(ItemClass item, View view, String itemKey) {
         ((TextView) view.findViewById(R.id.itemlist_textview_name)).setText(item.getName());
         ((TextView) view.findViewById(R.id.itemlist_textview_desc)).setText(item.getDesc());
         // noch das bild... dafür den cashe anzapfen ( managed die unit automatisch)
@@ -50,7 +50,7 @@ public class ItemListFragment extends Fragment {
                 .loadGalleryImage_Cashed(
                         getActivity(),
                         (ImageView) view.findViewById(R.id.itemlist_textview_image),
-                        item.getDbKey());
+                        itemKey);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ItemListFragment extends Fragment {
                 }
             }
 
-            GiggerItemAPI gi = GiggerItemAPI.getInstance();
+            GiggerMainAPI gi = GiggerMainAPI.getInstance();
             Query fbQ = gi.getCreatedByUserQuery();
 
             // check if empty..
@@ -115,8 +115,7 @@ public class ItemListFragment extends Fragment {
                 @Override
                 protected void populateView(View view, ItemClass object,int i) {
                     // Listitem füllen.
-                    object.setDbKey(listAdapter.getRef(i).getKey());
-                    FillItemList_ItemView(object,view);
+                    FillItemList_ItemView(object,view,listAdapter.getRef(i).getKey());
                     progBarItemLoading.setVisibility(View.GONE);
                     ((TextView) rootView.findViewById(R.id.maincategorylist_no_items_textview)).setVisibility(View.GONE);
                 }
@@ -158,7 +157,7 @@ public class ItemListFragment extends Fragment {
                 ghc.intentEditItem(itemIdent);
                 return true;
             case R.id.delEquip:
-                GiggerItemAPI.getInstance().removeItem(itemIdent);
+                GiggerMainAPI.getInstance().removeItem(itemIdent);
                 return true;
             case R.id.equipManager:
                 Log.i("ContextMenu", "Item 1b was chosen");
