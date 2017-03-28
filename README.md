@@ -1,3 +1,3 @@
-# testApp1
-first android app
-Hello this is my first app, im trying to learn android
+# Android App
+
+Android App with Cloud Synchronisation via Google Firebase
